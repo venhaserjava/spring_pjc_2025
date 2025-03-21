@@ -5,12 +5,18 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.rossatti.spring_pjc_2025.pessoa.dtos.request.PessoaRequest;
 import com.rossatti.spring_pjc_2025.pessoa.dtos.response.PessoaResponse;
+import com.rossatti.spring_pjc_2025.pessoa.exceptions.PessoaNotFoundException;
 import com.rossatti.spring_pjc_2025.pessoa.mappers.PessoaMapper;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class PessoaServiceImpl implements PessoaService {
 
     private final PessoaRepository repository;
