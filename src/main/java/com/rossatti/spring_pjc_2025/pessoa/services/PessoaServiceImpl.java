@@ -1,6 +1,6 @@
 package com.rossatti.spring_pjc_2025.pessoa.services;
 
-import java.util.List;
+//import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -22,13 +22,13 @@ public class PessoaServiceImpl implements PessoaService {
     private final PessoaRepository repository;
     private final PessoaMapper mapper;
 
-    @Override
-    public List<PessoaResponse> findAll(){
-        return repository.findAll()
-            .stream()
-            .map(mapper::toResponse)
-            .toList();
-    }
+    // @Override
+    // public List<PessoaResponse> findAll(){
+    //     return repository.findAll()
+    //         .stream()
+    //         .map(mapper::toResponse)
+    //         .toList();
+    // }
 
     @Override
     public Page<PessoaResponse> findPeople(String nome,Pageable pageable){
