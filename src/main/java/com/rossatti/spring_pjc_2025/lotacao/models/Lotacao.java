@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -32,12 +33,14 @@ public class Lotacao {
     @Column(name = "lot_id")
     private Long id;
 
-    @Column(name = "pes_id",nullable = false)    
+//    @Column(name = "pes_id",nullable = false)    
     @ManyToOne
+    @JoinColumn(name = "pes_id",nullable = false)
     private Pessoa pessoa;
 
+//    @Column(name = "unid_id",nullable = false)
     @ManyToOne
-    @Column(name = "unid_id",nullable = false)
+    @JoinColumn(name = "unid_id",nullable = false)
     private Unidade unidade;
 
     @Column(name = "lot_data_lotacao",nullable = false)
