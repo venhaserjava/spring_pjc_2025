@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -43,4 +45,10 @@ public class Cidade {
 //    @ValidUF
     @Column(name = "cid_uf",length = 2,nullable = false)  
     private String uf;
+
+    @PrePersist
+    @PreUpdate
+    private void formatarUf() {
+        this.uf = this.uf != null ? this.uf.toUpperCase() : null;
+    }
 }

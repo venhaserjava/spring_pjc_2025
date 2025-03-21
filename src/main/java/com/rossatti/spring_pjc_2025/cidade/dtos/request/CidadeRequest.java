@@ -23,6 +23,10 @@ public class CidadeRequest {
 
     @Size(min = 2,max = 2)
     @ValidUF
-    @NotBlank(message = "A UF é obrigatória.")
+    @NotBlank(message = "A UF é obrigatória.")    
     private String uf;   
+
+    public void setUf(String uf) {
+        this.uf = uf != null ? uf.toUpperCase() : null;
+    }
 }
