@@ -1,15 +1,19 @@
 package com.rossatti.spring_pjc_2025.pessoa.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+
+import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,5 +48,8 @@ public class Pessoa {
     @Column(name = "pes_data_nascimento")
     @JdbcTypeCode(SqlTypes.DATE)
     private LocalDate dataNascimento;
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<Lotacao> lotacoes;
 
 }
