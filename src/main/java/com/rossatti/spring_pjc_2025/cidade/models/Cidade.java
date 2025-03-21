@@ -1,5 +1,7 @@
 package com.rossatti.spring_pjc_2025.cidade.models;
 
+import com.rossatti.spring_pjc_2025.cidade.validators.ValidUF;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class Cidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cid_id")
     @EqualsAndHashCode.Include
     @ToString.Include
     private Long id;
@@ -35,6 +38,7 @@ public class Cidade {
     @Column(name = "cid_nome",length = 200,nullable = false)        
     private String nome;
 
-    
+    @ValidUF
+    @Column(name = "cid_uf",length = 2,nullable = false)  
     private String uf;
 }
