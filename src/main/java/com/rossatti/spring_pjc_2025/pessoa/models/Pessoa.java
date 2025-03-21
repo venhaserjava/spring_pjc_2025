@@ -30,7 +30,7 @@ public class Pessoa {
     private Long id;
 
     @Column(name = "pes_nome",length = 200,nullable = false,unique = true)
-    private String name;
+    private String nome;
 
     @Column(name = "pes_mae", length = 200, nullable = false)
     private String mae;
@@ -43,6 +43,6 @@ public class Pessoa {
 
     @Column(name = "pes_data_nascimento")
     @JdbcTypeCode(SqlTypes.DATE)
-    private LocalDate dateOfBirth;
+    private LocalDate dataNascimento;
 
 }
