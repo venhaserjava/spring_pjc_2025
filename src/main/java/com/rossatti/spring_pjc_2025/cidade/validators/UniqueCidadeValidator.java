@@ -1,5 +1,6 @@
 package com.rossatti.spring_pjc_2025.cidade.validators;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
@@ -13,11 +14,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UniqueCidadeValidator implements ConstraintValidator<UniqueCidade,CidadeRequest> {
 
+    @Autowired
     private CidadeRepository cidadeRepository;
     
-    public UniqueCidadeValidator(CidadeRepository cidadeRepository) {
-        this.cidadeRepository = cidadeRepository;
-    }
+    // public UniqueCidadeValidator(CidadeRepository cidadeRepository) {
+    //     this.cidadeRepository = cidadeRepository;
+    // }
 
 
     @Override

@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@UniqueCidade(message = "Já existe uma cidade com este nome e UF.")
 @NoArgsConstructor
 @AllArgsConstructor
-@UniqueCidade(message = "Já existe uma cidade com este nome e UF.")
 public class CidadeRequest {
 
     @Size(min = 3, max = 200)
