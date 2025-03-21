@@ -30,8 +30,9 @@ public class RestControllerExceptionHandler extends ResponseEntityExceptionHandl
 
     @Override  
     @Nullable  
+    @SuppressWarnings("null")
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
-        MethodArgumentNotValidException ex,
+         MethodArgumentNotValidException ex,
         HttpHeaders headers, 
         HttpStatusCode statusCode, 
         WebRequest request
@@ -63,8 +64,4 @@ public class RestControllerExceptionHandler extends ResponseEntityExceptionHandl
             .build();        
         return new ResponseEntity<Object>(body,status);
     }
-
-
-
-
 }

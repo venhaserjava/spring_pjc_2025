@@ -19,6 +19,7 @@ public class ModelNotFoundException  extends RuntimeException {
         super(message);
     }
 
+    @SuppressWarnings("null")    
     @ExceptionHandler(ModelNotFoundException.class)
      public ResponseEntity<ErrorResponse> handleModelNotFoundException(
          WebRequest request
