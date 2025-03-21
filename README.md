@@ -1,4 +1,4 @@
-# SPRING-PROJECT-2025
+# SPRING_PJC_2025
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
@@ -83,6 +83,5 @@ Pronto! Agora você tem o Docker rodando com PostgreSQL e MinIO. 🚀
 
 
 
-
-DROP DATABASE spring_project_2025;
-CREATE DATABASE spring_project_2025;
+DROP DATABASE spring_pjc_2025_db;
+CREATE DATABASE spring_pjc_2025_db;
