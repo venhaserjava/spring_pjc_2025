@@ -13,11 +13,10 @@ import com.rossatti.spring_pjc_2025.unidade.exceptions.UnidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
 import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeRepository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class LotacaoServiceImpl implements LotacaoService {
@@ -41,7 +40,7 @@ public class LotacaoServiceImpl implements LotacaoService {
 
     @Override
     @Transactional
-    public LotacaoResponse criarLotacao(LotacaoRequest request) {
+    public LotacaoResponse create(LotacaoRequest request) {
         Pessoa pessoa = pessoaRepository.findById(request.getPessoaId())
                 .orElseThrow(() -> new PessoaNotFoundException("Pessoa não encontrada com ID: " + request.getPessoaId()));
 
@@ -63,7 +62,7 @@ public class LotacaoServiceImpl implements LotacaoService {
 
     @Override
     @Transactional
-    public LotacaoResponse atualizarLotacao(Long id, LotacaoRequest request) {
+    public LotacaoResponse update(Long id, LotacaoRequest request) {
         Lotacao lotacao = lotacaoRepository.findById(id)
                 .orElseThrow(() -> new UnidadeNotFoundException("Lotação não encontrada com ID: " + id));
 
@@ -87,7 +86,7 @@ public class LotacaoServiceImpl implements LotacaoService {
 
     @Override
     @Transactional(readOnly = true)
-    public LotacaoResponse buscarPorId(Long id) {
+    public LotacaoResponse findPostingById(Long id) {
         Lotacao lotacao = lotacaoRepository.findById(id)
                 .orElseThrow(() -> new LotacaoNotFoundException("Lotação não encontrada com ID: " + id));
 
@@ -96,34 +95,19 @@ public class LotacaoServiceImpl implements LotacaoService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<LotacaoResponse> listarTodas() {
-        return lotacaoRepository.findAll()
-                .stream()
-//                .map(this::converterParaResponse)
-                .map(lotacaoMapper::toResponse)
-                .collect(Collectors.toList());
+    public Page<LotacaoResponse> findAllPosting(Pageable pageable) {
+            return lotacaoRepository.findAll(pageable)
+                    .map(lotacaoMapper::toResponse);
+        // return lotacaoRepository.findByNomeContaining(nome, pageable)
+        //        .map(lotacaoMapper::toResponse) ;
     }
 
     @Override
     @Transactional
-    public void deletarLotacao(Long id) {
+    public void delete(Long id) {
         if (!lotacaoRepository.existsById(id)) {
             throw new LotacaoNotFoundException("Lotação não encontrada com ID: " + id);
         }
         lotacaoRepository.deleteById(id);
-    }
-/*
-    private LotacaoResponse converterParaResponse(Lotacao lotacao) {
-        return LotacaoResponse.builder()
-                .id(lotacao.getId())
-                .pessoaId(lotacao.getPessoa().getId())
-                .pessoaNome(lotacao.getPessoa().getNome())
-                .unidadeId(lotacao.getUnidade().getId())
-                .unidadeNome(lotacao.getUnidade().getNome())
-                .dataLotacao(lotacao.getDataLotacao())
-                .dataRemocao(lotacao.getDataRemocao())
-                .portaria(lotacao.getPortaria())
-                .build();
-    }
-*/                
+    }             
 }

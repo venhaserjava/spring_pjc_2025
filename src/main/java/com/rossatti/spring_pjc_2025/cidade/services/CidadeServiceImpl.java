@@ -62,7 +62,7 @@ public class CidadeServiceImpl implements CidadeService {
     }
 
     @Override
-    public Page<Cidade> listarCidades(String nome, Pageable pageable) {
+    public Page<Cidade> findCities(String nome, Pageable pageable) {
         return repository.findByNomeContaining(nome, pageable);
     }
 

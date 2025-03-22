@@ -31,11 +31,11 @@ public class CidadeRestController {
     private final CidadeService service;
 
     @GetMapping(ApiRoutes.FIND_CITIES)  
-    public ResponseEntity<Page<Cidade>> listarCidades(
+    public ResponseEntity<Page<Cidade>> findCities(
         @RequestParam(required = false, defaultValue = "") String nome,
         @PageableDefault(size = 10, sort = "nome", direction = Direction.ASC) Pageable pageable) {
 
-        Page<Cidade> cidades = service.listarCidades(nome, pageable);
+        Page<Cidade> cidades = service.findCities(nome, pageable);
         return ResponseEntity.ok(cidades);
     }     
 

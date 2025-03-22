@@ -25,4 +25,11 @@ public class ApiRoutes {
     public static final String CREATE_CITY = API+CITIES;
     public static final String UPDATE_CITY = API+CITIES+"/{id}";
 
+    public static final String POSTING = "/lotacoes";
+    public static final String FIND_POSTING = API+POSTING;
+    public static final String FIND_POSTING_BY_ID = FIND_POSTING+"/{id}";
+    public static final String CREATE_POSTING = API+POSTING;
+    public static final String UPDATE_POSTING = API+POSTING+"/{id}";
+
+
 }

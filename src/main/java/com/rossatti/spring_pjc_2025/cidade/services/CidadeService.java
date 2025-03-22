@@ -13,7 +13,7 @@ public interface CidadeService {
     
     public List<CidadeResponse> findAll(Pageable pageable);
 
-    public Page<Cidade> listarCidades(String nome, Pageable pageable);
+    public Page<Cidade> findCities(String nome, Pageable pageable);
 
     public CidadeResponse findById(Long id);
 
