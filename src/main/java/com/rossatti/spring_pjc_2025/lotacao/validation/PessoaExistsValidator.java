@@ -1,22 +1,35 @@
 package com.rossatti.spring_pjc_2025.lotacao.validation;
 
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
-import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PessoaExistsValidator implements ConstraintValidator<ValidPessoaExists, Pessoa> {
-
+public class PessoaExistsValidator implements ConstraintValidator<ValidPessoaExists, Long> {
+    
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private final PessoaRepository pessoaRepository;
+
+    public PessoaExistsValidator(PessoaRepository pessoaRepository) {
+        this.pessoaRepository = pessoaRepository;
+    }
 
     @Override
-    public boolean isValid(Pessoa pessoa, ConstraintValidatorContext context) {
-        if (pessoa == null || pessoa.getId() == null) {
-            return false; // Se não foi informada uma pessoa válida, falha na validação
+    public boolean isValid(Long pessoaId, ConstraintValidatorContext context) {
+        if (pessoaId == null) {
+            return false; // ID não pode ser nulo
         }
 
-        return pessoaRepository.existsById(pessoa.getId()); // Verifica se existe no banco
+        boolean exists = pessoaRepository.existsById(pessoaId);
+        
+        if (!exists) {
+            // Personaliza a mensagem de erro
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate("A pessoa com ID " + pessoaId + " não existe no banco de dados.")
+                   .addConstraintViolation();
+        }
+
+        return exists;
     }
 }
+

@@ -1,22 +1,35 @@
 package com.rossatti.spring_pjc_2025.lotacao.validation;
 
+
 import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeRepository;
-import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UnidadeExistsValidator implements ConstraintValidator<ValidUnidadeExists, Unidade> {
+public class UnidadeExistsValidator implements ConstraintValidator<ValidUnidadeExists, Long> {
 
     @Autowired
-    private UnidadeRepository unidadeRepository;
+    private final UnidadeRepository unidadeRepository;
+
+    public UnidadeExistsValidator(UnidadeRepository unidadeRepository) {
+        this.unidadeRepository = unidadeRepository;
+    }
 
     @Override
-    public boolean isValid(Unidade unidade, ConstraintValidatorContext context) {
-        if (unidade == null || unidade.getId() == null) {
-            return false; // Se não foi informada uma unidade válida, falha na validação
+    public boolean isValid(Long unidadeId, ConstraintValidatorContext context) {
+        if (unidadeId == null) {
+            return false; // ID não pode ser nulo
         }
 
-        return unidadeRepository.existsById(unidade.getId()); // Verifica se existe no banco
+        boolean exists = unidadeRepository.existsById(unidadeId);
+        
+        if (!exists) {
+            // Personaliza a mensagem de erro
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate("A unidade com ID " + unidadeId + " não existe no banco de dados.")
+                   .addConstraintViolation();
+        }
+
+        return exists;
     }
 }

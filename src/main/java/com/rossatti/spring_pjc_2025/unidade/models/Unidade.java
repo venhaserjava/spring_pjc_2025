@@ -6,6 +6,7 @@ import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -43,6 +44,6 @@ public class Unidade {
     @ToString.Include    
     private String sigla;
 
-    @OneToMany(mappedBy = "unidade")
+    @OneToMany(mappedBy = "unidade", fetch = FetchType.LAZY)
     private List<Lotacao> lotacoes;
 }
