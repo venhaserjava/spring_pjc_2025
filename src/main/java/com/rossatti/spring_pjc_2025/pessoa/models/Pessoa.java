@@ -3,13 +3,12 @@ package com.rossatti.spring_pjc_2025.pessoa.models;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
 import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,11 +44,10 @@ public class Pessoa {
     @Column(name = "pes_sexo", length = 10, nullable = false)
     private String sexo; 
 
-    @Column(name = "pes_data_nascimento")
-    @JdbcTypeCode(SqlTypes.DATE)
+    @Column(name = "pes_data_nascimento",nullable = false)    
     private LocalDate dataNascimento;
 
-    @OneToMany(mappedBy = "pessoa")
+    @OneToMany(mappedBy = "pessoa",cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     private List<Lotacao> lotacoes;
 
 }
