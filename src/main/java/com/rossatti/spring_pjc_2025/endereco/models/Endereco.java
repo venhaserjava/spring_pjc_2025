@@ -44,7 +44,6 @@ public class Endereco {
 
     @ManyToOne
     @Column(name = "cid_id",nullable = false)
-    private Cidade cidade;
-    
+    private Cidade cidade;    
     
 }
