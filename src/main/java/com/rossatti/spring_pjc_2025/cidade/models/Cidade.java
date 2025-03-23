@@ -1,12 +1,19 @@
 package com.rossatti.spring_pjc_2025.cidade.models;
 
+import java.util.List;
+
+import com.rossatti.spring_pjc_2025.endereco.models.Endereco;
+import jakarta.persistence.CascadeType;
+
 //import com.rossatti.spring_pjc_2025.cidade.validators.ValidUF;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -51,4 +58,7 @@ public class Cidade {
     private void formatarUf() {
         this.uf = this.uf != null ? this.uf.toUpperCase() : null;
     }
+    @OneToMany(mappedBy = "endereco",cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+    private List<Endereco> enderecos;
+
 }
