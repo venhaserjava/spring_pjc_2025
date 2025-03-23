@@ -83,15 +83,21 @@ public class LotacaoServiceImpl implements LotacaoService {
         return lotacaoMapper.toResponse(lotacao);
 
     }
-
     @Override
-    @Transactional(readOnly = true)
-    public LotacaoResponse findPostingById(Long id) {
-        Lotacao lotacao = lotacaoRepository.findById(id)
-                .orElseThrow(() -> new LotacaoNotFoundException("Lotação não encontrada com ID: " + id));
-
-        return lotacaoMapper.toResponse(lotacao)        ;        
+    public LotacaoResponse findById(Long id) {
+        return lotacaoRepository.findById(id)
+            .map(lotacaoMapper::toResponse)
+            .orElseThrow(LotacaoNotFoundException::new);
     }
+//     @Override
+//     @Transactional(readOnly = true)
+//     public LotacaoResponse findPostingById(Long id) {
+//         Lotacao lotacao = lotacaoRepository.findById(id)
+//                 .orElseThrow(() -> new LotacaoNotFoundException("Lotação não encontrada com ID: " + id));
+
+//         return lotacaoMapper.toResponse(lotacao)        ;        
+//     }
+
 
     @Override
     @Transactional(readOnly = true)

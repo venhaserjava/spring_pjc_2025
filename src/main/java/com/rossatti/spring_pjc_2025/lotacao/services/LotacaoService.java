@@ -1,6 +1,5 @@
 package com.rossatti.spring_pjc_2025.lotacao.services;
 
-
 import com.rossatti.spring_pjc_2025.lotacao.dtos.request.LotacaoRequest;
 import com.rossatti.spring_pjc_2025.lotacao.dtos.response.LotacaoResponse;
 
@@ -9,13 +8,14 @@ import org.springframework.data.domain.Pageable;
 
 public interface LotacaoService {
 
-    LotacaoResponse create(LotacaoRequest request);
+    public LotacaoResponse create(LotacaoRequest request);
 
-    LotacaoResponse update(Long id, LotacaoRequest request);
+    public LotacaoResponse update(Long id, LotacaoRequest request);
 
-    LotacaoResponse findPostingById(Long id);
+//    LotacaoResponse findPostingById(Long id);
+    public LotacaoResponse findById(Long id);
 
-    Page<LotacaoResponse> findAllPosting(Pageable pageable);
+    public Page<LotacaoResponse> findAllPosting(Pageable pageable);
 
-    void delete(Long id);
+    public void delete(Long id);
 }

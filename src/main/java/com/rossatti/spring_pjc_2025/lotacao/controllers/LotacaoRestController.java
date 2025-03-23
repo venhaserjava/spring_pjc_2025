@@ -44,7 +44,7 @@ public class LotacaoRestController {
 //    @GetMapping("/{id}")
     @GetMapping(ApiRoutes.FIND_POSTING_BY_ID)
     public ResponseEntity<LotacaoResponse> findPostingById(@PathVariable Long id) {
-        LotacaoResponse response = lotacaoService.findPostingById(id);
+        LotacaoResponse response = lotacaoService.findById(id);
         return ResponseEntity.ok(response);
     }
 
@@ -52,7 +52,7 @@ public class LotacaoRestController {
     @GetMapping(ApiRoutes.FIND_POSTING)
     public ResponseEntity<Page<LotacaoResponse>> findAllPosting(
 //        @RequestParam(name = "q",required = false,defaultValue = "") String nome,
-        @PageableDefault(size = 10, sort = "nome", direction = Direction.ASC) Pageable pageable
+        @PageableDefault(size = 10, sort = "portaria", direction = Direction.ASC) Pageable pageable
     ) {
         Page<LotacaoResponse> responses = lotacaoService.findAllPosting(pageable);
         return ResponseEntity.ok(responses);
