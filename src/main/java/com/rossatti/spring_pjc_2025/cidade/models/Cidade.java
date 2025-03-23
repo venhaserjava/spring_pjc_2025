@@ -58,7 +58,7 @@ public class Cidade {
     private void formatarUf() {
         this.uf = this.uf != null ? this.uf.toUpperCase() : null;
     }
-    @OneToMany(mappedBy = "endereco",cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "cidade",cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     private List<Endereco> enderecos;
 
 }
