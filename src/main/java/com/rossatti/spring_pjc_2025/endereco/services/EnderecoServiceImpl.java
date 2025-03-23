@@ -3,6 +3,8 @@ package com.rossatti.spring_pjc_2025.endereco.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Service;
+
 import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.cidade.models.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
@@ -14,6 +16,7 @@ import com.rossatti.spring_pjc_2025.endereco.models.Endereco;
 import com.rossatti.spring_pjc_2025.endereco.repositories.EnderecoRepository;
 import jakarta.transaction.Transactional;
 
+@Service
 public class EnderecoServiceImpl implements EnderecoService {
     private final EnderecoRepository enderecoRepository;
     private final CidadeRepository cidadeRepository;
