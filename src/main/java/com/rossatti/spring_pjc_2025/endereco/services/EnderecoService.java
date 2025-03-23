@@ -1,6 +1,7 @@
 package com.rossatti.spring_pjc_2025.endereco.services;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;
 import com.rossatti.spring_pjc_2025.endereco.dtos.response.EnderecoResponse;
@@ -8,7 +9,7 @@ import com.rossatti.spring_pjc_2025.endereco.dtos.response.EnderecoResponse;
 public interface EnderecoService {
     EnderecoResponse create(EnderecoRequest dto);
     EnderecoResponse findById(Long id);
-    List<EnderecoResponse> findAll();
+    Page<EnderecoResponse> findAll(Pageable pageable);
     EnderecoResponse update(Long id, EnderecoRequest dto);
     void delete(Long id);
 }

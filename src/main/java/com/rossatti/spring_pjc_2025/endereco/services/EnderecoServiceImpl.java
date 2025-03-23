@@ -1,8 +1,7 @@
 package com.rossatti.spring_pjc_2025.endereco.services;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
@@ -46,10 +45,9 @@ public class EnderecoServiceImpl implements EnderecoService {
     }
 
     @Override
-    public List<EnderecoResponse> findAll() {
-        return enderecoRepository.findAll().stream()
-                .map(enderecoMapper::toResponse)
-                .collect(Collectors.toList());
+    public Page<EnderecoResponse> findAll(Pageable pageable) {
+        return enderecoRepository.findAll(pageable)
+            .map(enderecoMapper::toResponse);
     }
 
     @Override
