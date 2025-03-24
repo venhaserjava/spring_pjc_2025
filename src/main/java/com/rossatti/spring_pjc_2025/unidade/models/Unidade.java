@@ -1,7 +1,9 @@
 package com.rossatti.spring_pjc_2025.unidade.models;
 
 import java.util.List;
+import java.util.Set;
 
+import com.rossatti.spring_pjc_2025.endereco.models.Endereco;
 import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
 
 import jakarta.persistence.Column;
@@ -10,6 +12,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -46,4 +51,12 @@ public class Unidade {
 
     @OneToMany(mappedBy = "unidade", fetch = FetchType.LAZY)
     private List<Lotacao> lotacoes;
+
+    @ManyToMany
+    @JoinTable(
+        name = "unidade_endereco",
+        joinColumns = @JoinColumn(name = "unid_id"),
+        inverseJoinColumns = @JoinColumn(name = "end_id")
+    )
+    private Set<Endereco> enderecos;
 }

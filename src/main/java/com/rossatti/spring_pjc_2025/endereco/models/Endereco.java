@@ -1,17 +1,23 @@
 package com.rossatti.spring_pjc_2025.endereco.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.rossatti.spring_pjc_2025.cidade.models.Cidade;
+import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+//import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -22,7 +28,7 @@ import lombok.NoArgsConstructor;
     uniqueConstraints =     @UniqueConstraint( columnNames = {"end_logradouro", "end_bairro","end_numero","cid_id"}   )
 )
 @Data
-@Builder
+//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -54,4 +60,7 @@ public class Endereco {
     @EqualsAndHashCode.Include
     private Cidade cidade;    
     
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<Unidade> unidades = new HashSet<>();
+//    private Set<Unidade> unidades;
 }

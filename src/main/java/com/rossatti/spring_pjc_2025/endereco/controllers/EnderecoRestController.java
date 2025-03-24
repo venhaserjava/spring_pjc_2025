@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
@@ -19,16 +18,17 @@ import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;
 import com.rossatti.spring_pjc_2025.endereco.dtos.response.EnderecoResponse;
 import com.rossatti.spring_pjc_2025.endereco.services.EnderecoService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
-//@RequestMapping("/enderecos")
-@RequestMapping(ApiRoutes.ADDRESSES)
+@RequiredArgsConstructor
 public class EnderecoRestController {
 
     private final EnderecoService enderecoService;
 
-    public EnderecoRestController(EnderecoService enderecoService) {
-        this.enderecoService = enderecoService;
-    }
+    // public EnderecoRestController(EnderecoService enderecoService) {
+    //     this.enderecoService = enderecoService;
+    // }
     
     //    @GetMapping("/{id}")
     @GetMapping(ApiRoutes.FIND_ADDRESS_BY_ID)
