@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PessoaFotoResponse {
-    private Long id;
-    private String pessoaNome;
+    private Long id;    
     private LocalDate data;
     private String bucket;
     private String hash;
