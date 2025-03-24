@@ -1,5 +1,7 @@
 package com.rossatti.spring_pjc_2025.pessoa.mappers;
 
+import java.util.HashSet;
+
 import org.springframework.stereotype.Component;
 
 import com.rossatti.spring_pjc_2025.pessoa.dtos.request.PessoaRequest;
@@ -17,7 +19,7 @@ public class PessoaMapperImpl implements PessoaMapper {
             .dataNascimento(model.getDataNascimento())
             .mae(model.getMae())
             .pai(model.getPai())        
-            .sexo(model.getSexo()) // ✅ Agora pega direto como String
+            .sexo(model.getSexo()) 
             .build();        
     }
     
@@ -27,8 +29,9 @@ public class PessoaMapperImpl implements PessoaMapper {
             .nome(request.getNome())
             .pai(request.getPai())            
             .mae(request.getMae())
-            .sexo(request.getSexo()) // ✅ Agora recebe como String
+            .sexo(request.getSexo()) 
             .dataNascimento(request.getDataNascimento())
+            .enderecos(new HashSet<>())
             .build();
     }
 

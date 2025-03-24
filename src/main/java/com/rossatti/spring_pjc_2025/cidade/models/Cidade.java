@@ -2,6 +2,7 @@ package com.rossatti.spring_pjc_2025.cidade.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rossatti.spring_pjc_2025.endereco.models.Endereco;
 import jakarta.persistence.CascadeType;
 
@@ -59,6 +60,7 @@ public class Cidade {
         this.uf = this.uf != null ? this.uf.toUpperCase() : null;
     }
     @OneToMany(mappedBy = "cidade",cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+    @JsonIgnore
     private List<Endereco> enderecos;
 
 }

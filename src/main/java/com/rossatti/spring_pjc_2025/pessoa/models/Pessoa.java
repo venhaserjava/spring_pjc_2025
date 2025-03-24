@@ -1,8 +1,11 @@
 package com.rossatti.spring_pjc_2025.pessoa.models;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.rossatti.spring_pjc_2025.endereco.models.Endereco;
 import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
 
 import jakarta.persistence.CascadeType;
@@ -12,6 +15,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -49,5 +55,14 @@ public class Pessoa {
 
     @OneToMany(mappedBy = "pessoa",cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
     private List<Lotacao> lotacoes;
+
+    @ManyToMany
+    @JoinTable(
+        name = "pessoa_endereco",
+        joinColumns = @JoinColumn(name = "pes_id"),
+        inverseJoinColumns = @JoinColumn(name = "end_id")
+    )
+    private Set<Endereco> enderecos = new HashSet<>();
+
 
 }

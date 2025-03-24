@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.rossatti.spring_pjc_2025.cidade.models.Cidade;
+import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
 import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
 
 import jakarta.persistence.Column;
@@ -62,5 +63,8 @@ public class Endereco {
     
     @ManyToMany(mappedBy = "enderecos")
     private Set<Unidade> unidades = new HashSet<>();
-//    private Set<Unidade> unidades;
+
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<Pessoa> pessoas = new HashSet<>();
+
 }
