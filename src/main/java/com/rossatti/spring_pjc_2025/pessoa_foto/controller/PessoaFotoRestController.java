@@ -1,11 +1,10 @@
 package com.rossatti.spring_pjc_2025.pessoa_foto.controller;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,8 +55,8 @@ public class PessoaFotoRestController {
     }
 
     @GetMapping("/listar/{pessoaId}")
-    public ResponseEntity<Page<String>> listarFotos(@PathVariable Long pessoaId) {
-        Page<String> fotos = pessoaFotoService.listarFotosPorPessoa(pessoaId);
+    public ResponseEntity<List<String>> listarFotos(@PathVariable Long pessoaId) {
+        List<String> fotos = pessoaFotoService.listarFotosPorPessoa(pessoaId);
         return ResponseEntity.ok(fotos);
     }
 
@@ -77,7 +76,7 @@ public class PessoaFotoRestController {
             return ResponseEntity.status(500).body("Erro ao gerar link temporário: " + e.getMessage());
         }
     }
-
+/*
     @DeleteMapping("/remover/{hash}")
     public ResponseEntity<?> removerFoto(@PathVariable String hash) {
         try {
@@ -93,5 +92,6 @@ public class PessoaFotoRestController {
             return ResponseEntity.status(500).body("Erro ao remover foto: " + e.getMessage());
         }
     }
+*/        
 
 }

@@ -10,7 +10,7 @@ class MinioConfig {
     @Bean
     public MinioClient minioClient() {
         return MinioClient.builder()
-                .endpoint("http://localhost:9000")  // Altere conforme necessário
+                .endpoint("http://localhost:9001")  // Altere conforme necessário
                 .credentials("ROOTUSER", "mudarSenha@123")  // Altere conforme necessário
                 .build();
     }
