@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rossatti.spring_pjc_2025.pessoa_foto.services.PessoaFotoService;
 
+import io.minio.BucketExistsArgs;
 import io.minio.GetPresignedObjectUrlArgs;
+import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.http.Method;
@@ -31,12 +34,18 @@ public class PessoaFotoRestController {
 
     private final String bucketName = "fotos";
 
-    @PostMapping("/upload")
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> uploadFoto(@RequestParam("file") MultipartFile file,
                                          @RequestParam("pessoaId") Long pessoaId) {
         try {
             String hash = pessoaFotoService.generateHash(file);
-            String fileName = hash + ".jpg";
+            String fileName = hash + ".png";
+//            String objectName = bucketName+"/" + fileName; // Certifique-se de incluir a pasta correta
+
+
+            if (!minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build())) {
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+            }
 
             minioClient.putObject(
                 PutObjectArgs.builder()
@@ -46,9 +55,8 @@ public class PessoaFotoRestController {
                     .contentType(file.getContentType())
                     .build()
             );
-
             pessoaFotoService.saveFoto(pessoaId, hash);
-            return ResponseEntity.ok("Foto enviada com sucesso");
+            return ResponseEntity.ok("Foto salva com sucesso. Hash: " + hash);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Erro ao enviar foto: " + e.getMessage());
         }

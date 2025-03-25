@@ -68,7 +68,7 @@ public class PessoaFotoServiceImpl implements PessoaFotoService {
 
         PessoaFoto foto = new PessoaFoto();
         foto.setPessoa(pessoa);
-        foto.setData(LocalDate.now());
+        foto.setData(LocalDate.now());        
         foto.setBucket("fotos");
         foto.setHash(hash);
 
