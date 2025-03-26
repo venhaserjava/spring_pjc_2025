@@ -1,5 +1,5 @@
 CREATE TABLE servidor_temporario (
-    pes_id INT NOT NULL,
+    pes_id bigint NOT NULL,
     st_data_admissao DATE NOT NULL,
     st_data_demissao DATE NULL,
     PRIMARY KEY (pes_id, st_data_admissao),
