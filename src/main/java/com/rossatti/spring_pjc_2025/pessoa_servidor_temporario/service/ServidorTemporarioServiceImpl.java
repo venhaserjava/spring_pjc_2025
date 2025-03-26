@@ -86,6 +86,7 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
         // 🔹 Criar e salvar Servidor Temporário
         ServidorTemporario servidorTemporario = new ServidorTemporario();
         servidorTemporario.setPessoa(pessoaOpt.get());
+        servidorTemporario.setPessoaId(dto.getPessoaId());        
         servidorTemporario.setDataAdmissao(dto.getDataAdmissao());
         servidorTemporarioRepository.save(servidorTemporario);
 
