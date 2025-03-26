@@ -1,15 +1,15 @@
-package com.rossatti.spring_pjc_2025.pessoa_serv_temp.dtos.request;
+package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request;
 
+import com.rossatti.spring_pjc_2025.lotacao.dtos.LotacaoDTO;
 import java.time.LocalDate;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
+
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Data
 @Builder
@@ -25,6 +25,5 @@ public class ServidorTemporarioRequest {
 
     @NotNull(message = "Os dados de lotação são obrigatórios.")
     private LotacaoDTO lotacao;
-
 
 }
