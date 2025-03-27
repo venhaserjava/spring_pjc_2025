@@ -1,9 +1,10 @@
-package com.rossatti.spring_pjc_2025.cidade.models;
+package com.rossatti.spring_pjc_2025.cidade.entitys;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.rossatti.spring_pjc_2025.endereco.models.Endereco;
+import com.rossatti.spring_pjc_2025.endereco.entity.Endereco;
+
 import jakarta.persistence.CascadeType;
 
 //import com.rossatti.spring_pjc_2025.cidade.validators.ValidUF;

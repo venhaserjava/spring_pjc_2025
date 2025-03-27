@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.rossatti.spring_pjc_2025.endereco.models.Endereco;
+import com.rossatti.spring_pjc_2025.endereco.entity.Endereco;
 import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
 
 import jakarta.persistence.CascadeType;

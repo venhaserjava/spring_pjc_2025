@@ -1,7 +1,6 @@
 package com.rossatti.spring_pjc_2025.cidade.services;
 
 import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
+import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.cidade.mappers.CidadeMapper;
-import com.rossatti.spring_pjc_2025.cidade.models.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -54,11 +53,14 @@ public class CidadeServiceImpl implements CidadeService {
         if (id==null || request==null) {
             throw new IllegalArgumentException("Os Parâmetros id e request não pode ser nulo");            
         }
+
         var cidadeToUpdate = repository.findById(id)
-                            .orElseThrow(CidadeNotFoundException::new);
+                            .orElseThrow(CidadeNotFoundException::new);                            
+        
         BeanUtils.copyProperties(request,cidadeToUpdate,"id");
         var cidadeUpdated = repository.save(cidadeToUpdate);
         return mapper.toResponse(cidadeUpdated);        
+        
     }
 
     @Override

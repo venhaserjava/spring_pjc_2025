@@ -13,12 +13,9 @@ import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
 import com.rossatti.spring_pjc_2025.lotacao.repositories.LotacaoRepository;
 import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
-import com.rossatti.spring_pjc_2025.pessoa_foto.exceptions.PessoaFotoNotFoundException;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.request.ServidorEfetivoRequest;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.entity.ServidorEfetivo;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.repositories.ServidorEfetivoRepository;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.models.ServidorTemporario;
 import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
 import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeRepository;
 
@@ -77,12 +74,12 @@ public class ServidorEfetivoServiceImpl implements ServidorEfetivoService {
             throw new ResponseStatusException(BAD_REQUEST, criarMensagemErro(erros));
         }
 
-        // 🔹 Criar e salvar Servidor Temporário
-        ServidorEfetivo servidorTemporario = new ServidorEfetivo();
-        servidorTemporario.setPessoa(pessoaOpt.get());
-        servidorTemporario.setId(dto.getPessoaId());        
+        // 🔹 Criar e salvar Servidor Efetivo
+        ServidorEfetivo servidorEfetivo = new ServidorEfetivo();
+        servidorEfetivo.setPessoa(pessoaOpt.get());
+        servidorEfetivo.setId(dto.getPessoaId());        
 //        servidorTemporario.setDataAdmissao(dto.getDataAdmissao());
-        servidorEfetivoRepository.save(servidorTemporario);
+        servidorEfetivoRepository.save(servidorEfetivo);
 
         // 🔹 Criar e salvar Lotação
         Lotacao lotacao = new Lotacao();

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
-import com.rossatti.spring_pjc_2025.cidade.models.Cidade;
+import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.services.CidadeService;
 import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
 
