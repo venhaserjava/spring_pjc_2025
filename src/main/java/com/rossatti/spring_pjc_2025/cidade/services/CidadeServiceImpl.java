@@ -1,6 +1,5 @@
 package com.rossatti.spring_pjc_2025.cidade.services;
 
-import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,13 +21,13 @@ public class CidadeServiceImpl implements CidadeService {
     private final CidadeRepository repository;
     private final CidadeMapper mapper;
 
-    @Override
-    public List<CidadeResponse> findAll(Pageable pageable) {
-        return repository.findAll(pageable)
-            .stream()
-            .map(mapper::toResponse)
-            .toList();
-    }
+    // @Override
+    // public List<CidadeResponse> findAll(Pageable pageable) {
+    //     return repository.findAll(pageable)
+    //         .stream()
+    //         .map(mapper::toResponse)
+    //         .toList();
+    // }
 
     @Override
     public CidadeResponse findById(Long id) {
@@ -53,7 +52,9 @@ public class CidadeServiceImpl implements CidadeService {
         if (id==null || request==null) {
             throw new IllegalArgumentException("Os Parâmetros id e request não pode ser nulo");            
         }
-
+        if(! repository.existsById(id)){
+            throw new IllegalArgumentException("Não foi encontrada a cidade do ID informado");            
+        }
         var cidadeToUpdate = repository.findById(id)
                             .orElseThrow(CidadeNotFoundException::new);                            
         

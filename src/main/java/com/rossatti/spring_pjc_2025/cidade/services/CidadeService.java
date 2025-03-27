@@ -1,6 +1,6 @@
 package com.rossatti.spring_pjc_2025.cidade.services;
 
-import java.util.List;
+//import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,8 +10,6 @@ import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
 import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
 
 public interface CidadeService {
-    
-    public List<CidadeResponse> findAll(Pageable pageable);
 
     public Page<Cidade> findCities(String nome, Pageable pageable);
 
