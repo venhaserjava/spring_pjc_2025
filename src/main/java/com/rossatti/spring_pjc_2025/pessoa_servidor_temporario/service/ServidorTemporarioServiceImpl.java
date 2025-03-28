@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import static org.springframework.http.HttpStatus.*;
 
-import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
+import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
 import com.rossatti.spring_pjc_2025.lotacao.repositories.LotacaoRepository;
 import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;

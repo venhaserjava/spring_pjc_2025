@@ -3,7 +3,7 @@ package com.rossatti.spring_pjc_2025.lotacao.mappers;
 import org.springframework.stereotype.Component;
 
 import com.rossatti.spring_pjc_2025.lotacao.dtos.response.LotacaoResponse;
-import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
+import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
 
 @Component
 public class LotacaoMapperImpl implements LotacaoMapper {

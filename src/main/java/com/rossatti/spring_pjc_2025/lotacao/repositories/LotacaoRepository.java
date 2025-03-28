@@ -7,7 +7,7 @@ import java.util.List;
 // import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
+import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
 
 public interface LotacaoRepository  extends JpaRepository<Lotacao,Long>{
      List<Lotacao> findByDataLotacaoAfter(LocalDate data);

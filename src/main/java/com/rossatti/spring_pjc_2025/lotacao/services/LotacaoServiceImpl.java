@@ -2,9 +2,9 @@ package com.rossatti.spring_pjc_2025.lotacao.services;
 
 import com.rossatti.spring_pjc_2025.lotacao.dtos.request.LotacaoRequest;
 import com.rossatti.spring_pjc_2025.lotacao.dtos.response.LotacaoResponse;
+import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
 import com.rossatti.spring_pjc_2025.lotacao.exceptions.LotacaoNotFoundException;
 import com.rossatti.spring_pjc_2025.lotacao.mappers.LotacaoMapper;
-import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
 import com.rossatti.spring_pjc_2025.lotacao.repositories.LotacaoRepository;
 import com.rossatti.spring_pjc_2025.pessoa.exceptions.PessoaNotFoundException;
 import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;

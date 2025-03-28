@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
-import com.rossatti.spring_pjc_2025.lotacao.models.Lotacao;
+import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

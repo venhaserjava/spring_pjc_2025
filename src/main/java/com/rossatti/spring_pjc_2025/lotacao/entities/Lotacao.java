@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.lotacao.models;
+package com.rossatti.spring_pjc_2025.lotacao.entities;
 
 import java.time.LocalDate;
 //import java.util.Date;
