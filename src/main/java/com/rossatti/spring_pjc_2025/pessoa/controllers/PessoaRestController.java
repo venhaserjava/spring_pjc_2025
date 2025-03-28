@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
 import com.rossatti.spring_pjc_2025.pessoa.dtos.request.PessoaRequest;
 import com.rossatti.spring_pjc_2025.pessoa.dtos.response.PessoaResponse;
 import com.rossatti.spring_pjc_2025.pessoa.services.PessoaService;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PessoaRestController {
 
-    private final PessoaService service;
+    private final PessoaService service;    
 
     @GetMapping(ApiRoutes.FIND_PEOPLES)
     public Page<PessoaResponse> findPeople(
@@ -40,7 +38,6 @@ public class PessoaRestController {
     public PessoaResponse findPersonById(@PathVariable Long id){
         return service.findPersonById(id);
     }
-
     @PostMapping(ApiRoutes.CREATE_PEOPLE)
     @ResponseStatus(code = HttpStatus.CREATED)
     public PessoaResponse create(@RequestBody @Valid PessoaRequest request){
