@@ -78,8 +78,7 @@ public class ServidorEfetivoServiceImpl implements ServidorEfetivoService {
         ServidorEfetivo servidorEfetivo = new ServidorEfetivo();
         servidorEfetivo.setPessoa(pessoaOpt.get());
         servidorEfetivo.setId(dto.getPessoaId());        
-//        servidorTemporario.setDataAdmissao(dto.getDataAdmissao());
-        servidorEfetivoRepository.save(servidorEfetivo);
+//        servidorEfetivoRepository.save(servidorEfetivo);
 
         // 🔹 Criar e salvar Lotação
         Lotacao lotacao = new Lotacao();
