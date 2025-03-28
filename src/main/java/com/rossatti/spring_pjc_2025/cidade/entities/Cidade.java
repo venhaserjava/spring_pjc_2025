@@ -3,7 +3,7 @@ package com.rossatti.spring_pjc_2025.cidade.entities;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.rossatti.spring_pjc_2025.endereco.entity.Endereco;
+import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 
 import jakarta.persistence.CascadeType;
 

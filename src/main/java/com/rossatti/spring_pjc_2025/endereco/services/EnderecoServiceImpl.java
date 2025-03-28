@@ -9,7 +9,7 @@ import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
 import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;
 import com.rossatti.spring_pjc_2025.endereco.dtos.response.EnderecoResponse;
-import com.rossatti.spring_pjc_2025.endereco.entity.Endereco;
+import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.endereco.exceptions.EnderecoNotFoundException;
 import com.rossatti.spring_pjc_2025.endereco.mappers.EnderecoMapper;
 import com.rossatti.spring_pjc_2025.endereco.repositories.EnderecoRepository;

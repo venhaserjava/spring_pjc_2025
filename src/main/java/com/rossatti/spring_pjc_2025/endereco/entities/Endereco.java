@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.endereco.entity;
+package com.rossatti.spring_pjc_2025.endereco.entities;
 
 import java.util.HashSet;
 import java.util.Set;
