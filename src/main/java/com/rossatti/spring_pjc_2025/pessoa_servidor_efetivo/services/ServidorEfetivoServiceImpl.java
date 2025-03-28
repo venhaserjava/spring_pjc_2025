@@ -16,7 +16,7 @@ import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.request.ServidorEfetivoRequest;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.entity.ServidorEfetivo;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.repositories.ServidorEfetivoRepository;
-import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
+import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
 import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeRepository;
 
 @Service

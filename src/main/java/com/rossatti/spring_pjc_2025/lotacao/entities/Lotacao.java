@@ -4,7 +4,7 @@ import java.time.LocalDate;
 //import java.util.Date;
 
 import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
-import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
+import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

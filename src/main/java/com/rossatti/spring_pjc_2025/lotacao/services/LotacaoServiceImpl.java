@@ -9,8 +9,8 @@ import com.rossatti.spring_pjc_2025.lotacao.repositories.LotacaoRepository;
 import com.rossatti.spring_pjc_2025.pessoa.exceptions.PessoaNotFoundException;
 import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
+import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
 import com.rossatti.spring_pjc_2025.unidade.exceptions.UnidadeNotFoundException;
-import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
 import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeRepository;
 
 import org.springframework.data.domain.Page;

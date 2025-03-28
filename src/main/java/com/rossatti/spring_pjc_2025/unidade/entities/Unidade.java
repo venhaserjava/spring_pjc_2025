@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.unidade.models;
+package com.rossatti.spring_pjc_2025.unidade.entities;
 
 import java.util.List;
 import java.util.Set;

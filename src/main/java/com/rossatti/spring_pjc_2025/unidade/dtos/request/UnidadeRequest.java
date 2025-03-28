@@ -3,7 +3,7 @@ package com.rossatti.spring_pjc_2025.unidade.dtos.request;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.rossatti.spring_pjc_2025.commons.validators.UniqueValue;
-import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
+import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

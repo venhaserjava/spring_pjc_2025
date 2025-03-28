@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.rossatti.spring_pjc_2025.unidade.dtos.request.UnidadeRequest;
 import com.rossatti.spring_pjc_2025.unidade.dtos.response.UnidadeResponse;
-import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
+import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
 
 @Component
 public class UnidadeMapperImpl implements UnidadeMapper {
