@@ -31,6 +31,11 @@ public class CidadeServiceImpl implements CidadeService {
 
     @Override
     public CidadeResponse findById(Long id) {
+
+        if(! repository.existsById(id)){
+            return new CidadeResponse();                    
+        }
+
         return repository.findById(id)
             .map(mapper::toResponse)
             .orElseThrow(CidadeNotFoundException::new);
@@ -52,9 +57,10 @@ public class CidadeServiceImpl implements CidadeService {
         if (id==null || request==null) {
             throw new IllegalArgumentException("Os Parâmetros id e request não pode ser nulo");            
         }
-        if(! repository.existsById(id)){
-            throw new IllegalArgumentException("Não foi encontrada a cidade do ID informado");            
-        }
+        
+        //  if(! repository.existsById(id)){            
+        //      return entityNotFound();            
+        //  }
         var cidadeToUpdate = repository.findById(id)
                             .orElseThrow(CidadeNotFoundException::new);                            
         
@@ -67,8 +73,6 @@ public class CidadeServiceImpl implements CidadeService {
     @Override
     public Page<Cidade> findCities(String nome, Pageable pageable) {
         return repository.findByNomeContaining(nome, pageable);
-    }
-
-    
+    }   
 
 }
