@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
-import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.services.CidadeService;
 import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
 
@@ -31,11 +30,11 @@ public class CidadeRestController {
     private final CidadeService service;
 
     @GetMapping(ApiRoutes.FIND_CITIES)  
-    public ResponseEntity<Page<Cidade>> findCities(
+    public ResponseEntity<Page<CidadeResponse>> findAll(
         @RequestParam(required = false, defaultValue = "") String nome,
         @PageableDefault(size = 10, sort = "nome", direction = Direction.ASC) Pageable pageable) {
 
-        Page<Cidade> cidades = service.findCities(nome, pageable);
+        Page<CidadeResponse> cidades = service.findAll(nome, pageable);
         return ResponseEntity.ok(cidades);
     }     
 

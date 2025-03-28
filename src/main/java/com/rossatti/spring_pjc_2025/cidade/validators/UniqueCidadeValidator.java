@@ -16,11 +16,6 @@ public class UniqueCidadeValidator implements ConstraintValidator<UniqueCidade,C
 
     @Autowired
     private CidadeRepository cidadeRepository;
-    
-    // public UniqueCidadeValidator(CidadeRepository cidadeRepository) {
-    //     this.cidadeRepository = cidadeRepository;
-    // }
-
 
     @Override
     public boolean isValid(CidadeRequest request, ConstraintValidatorContext context) {

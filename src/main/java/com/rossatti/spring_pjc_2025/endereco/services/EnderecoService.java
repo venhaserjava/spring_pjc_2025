@@ -7,9 +7,12 @@ import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;
 import com.rossatti.spring_pjc_2025.endereco.dtos.response.EnderecoResponse;
 
 public interface EnderecoService {
-    EnderecoResponse create(EnderecoRequest dto);
+    Page<EnderecoResponse> findAll(String logradouro, Pageable pageable);
+
     EnderecoResponse findById(Long id);
-    Page<EnderecoResponse> findAll(Pageable pageable);
+
+    EnderecoResponse create(EnderecoRequest dto);
+
     EnderecoResponse update(Long id, EnderecoRequest dto);
-    void delete(Long id);
+    
 }

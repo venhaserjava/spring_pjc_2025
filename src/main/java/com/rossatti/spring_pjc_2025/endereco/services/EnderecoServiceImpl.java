@@ -17,58 +17,58 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class EnderecoServiceImpl implements EnderecoService {
-    private final EnderecoRepository enderecoRepository;
+    private final EnderecoRepository repository;
     private final CidadeRepository cidadeRepository;
-    private final EnderecoMapper enderecoMapper;
+    private final EnderecoMapper mapper;
 
-    public EnderecoServiceImpl(EnderecoRepository enderecoRepository, CidadeRepository cidadeRepository, EnderecoMapper enderecoMapper) {
-        this.enderecoRepository = enderecoRepository;
+    public EnderecoServiceImpl(
+        EnderecoRepository enderecoRepository, 
+        CidadeRepository cidadeRepository, 
+        EnderecoMapper enderecoMapper
+    ) {
+        this.repository = enderecoRepository;
         this.cidadeRepository = cidadeRepository;
-        this.enderecoMapper = enderecoMapper;
+        this.mapper = enderecoMapper;
     }
+    @Override
+    public Page<EnderecoResponse> findAll(String logradouro,Pageable pageable) {
+        return repository.findByLogradouroContaining(logradouro, pageable)
+                           .map(mapper::toResponse) ;
+    }
+    
+    @Override
+    public EnderecoResponse findById(Long id) {
+
+        if(!repository.existsById(id)){
+            return new EnderecoResponse();
+        }
+        
+        Endereco endereco = repository.findById(id)
+        .orElseThrow(() -> new EnderecoNotFoundException("Endereço não encontrado"));
+        return mapper.toResponse(endereco);
+    }    
+
 
     @Override
     @Transactional
     public EnderecoResponse create(EnderecoRequest dto) {
         Cidade cidade = cidadeRepository.findById(dto.getCidadeId())
                 .orElseThrow(() -> new CidadeNotFoundException("Cidade não encontrada"));
-        Endereco endereco = enderecoMapper.toModel(dto, cidade);
-        endereco = enderecoRepository.save(endereco);
-        return enderecoMapper.toResponse(endereco);
-    }
-
-    @Override
-    public EnderecoResponse findById(Long id) {
-        Endereco endereco = enderecoRepository.findById(id)
-                .orElseThrow(() -> new EnderecoNotFoundException("Endereço não encontrado"));
-        return enderecoMapper.toResponse(endereco);
-    }
-
-    @Override
-    public Page<EnderecoResponse> findAll(Pageable pageable) {
-        return enderecoRepository.findAll(pageable)
-            .map(enderecoMapper::toResponse);
-    }
+        Endereco endereco = mapper.toModel(dto, cidade);
+        endereco = repository.save(endereco);
+        return mapper.toResponse(endereco);
+    }    
 
     @Override
     @Transactional
     public EnderecoResponse update(Long id, EnderecoRequest dto) {
-        Endereco endereco = enderecoRepository.findById(id)
+        Endereco endereco = repository.findById(id)
                 .orElseThrow(() -> new EnderecoNotFoundException("Endereço não encontrado"));
         Cidade cidade = cidadeRepository.findById(dto.getCidadeId())
                 .orElseThrow(() -> new CidadeNotFoundException("Cidade não encontrada"));
-        endereco = enderecoMapper.toModel(dto, cidade);
+        endereco = mapper.toModel(dto, cidade);
         endereco.setId(id);
-        endereco = enderecoRepository.save(endereco);
-        return enderecoMapper.toResponse(endereco);
-    }
-
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        if (!enderecoRepository.existsById(id)) {
-            throw new EnderecoNotFoundException("Endereço não encontrado");
-        }
-        enderecoRepository.deleteById(id);
+        endereco = repository.save(endereco);
+        return mapper.toResponse(endereco);
     }
 }

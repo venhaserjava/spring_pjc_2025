@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
-import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.cidade.mappers.CidadeMapper;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
@@ -21,6 +20,11 @@ public class CidadeServiceImpl implements CidadeService {
     private final CidadeRepository repository;
     private final CidadeMapper mapper;
 
+    @Override
+    public Page<CidadeResponse> findAll(String nome, Pageable pageable) {
+        return repository.findByNomeContaining(nome, pageable)
+                        .map(mapper::toResponse);
+    }   
     // @Override
     // public List<CidadeResponse> findAll(Pageable pageable) {
     //     return repository.findAll(pageable)
@@ -56,11 +60,7 @@ public class CidadeServiceImpl implements CidadeService {
     public CidadeResponse update(Long id, CidadeRequest request) {
         if (id==null || request==null) {
             throw new IllegalArgumentException("Os Parâmetros id e request não pode ser nulo");            
-        }
-        
-        //  if(! repository.existsById(id)){            
-        //      return entityNotFound();            
-        //  }
+        }        
         var cidadeToUpdate = repository.findById(id)
                             .orElseThrow(CidadeNotFoundException::new);                            
         
@@ -70,9 +70,5 @@ public class CidadeServiceImpl implements CidadeService {
         
     }
 
-    @Override
-    public Page<Cidade> findCities(String nome, Pageable pageable) {
-        return repository.findByNomeContaining(nome, pageable);
-    }   
 
 }

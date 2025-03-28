@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import com.rossatti.spring_pjc_2025.cidade.validators.UniqueCidade;
 
+
 public class AnnotationUtils {
     public static String getUniqueCidadeMessage(String className) {
         try {
@@ -20,6 +21,7 @@ public class AnnotationUtils {
             e.printStackTrace();
             return "Classe não encontrada.";
         }
+        
         try {
             // Carregar a classe dinamicamente
             Class<?> clazz = Class.forName(className);
@@ -33,6 +35,6 @@ public class AnnotationUtils {
             e.printStackTrace();
             return "Classe não encontrada.";
         }
-        return "Anotação @UniqueCidade não encontrada na classe.";    }
-
+        return "Anotação @UniqueCidade não encontrada na classe.";    
+    }
 }
