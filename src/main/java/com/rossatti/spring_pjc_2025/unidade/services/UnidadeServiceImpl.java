@@ -21,14 +21,16 @@ public class UnidadeServiceImpl implements UnidadeService {
     private final UnidadeMapper mapper;
 
     @Override
-    public Page<UnidadeResponse> findUnits(String unit,Pageable pageable) {
-        return repository.findByNomeContaining(unit,pageable)            
-            .map(mapper::toResponse);            
-            
+    public Page<UnidadeResponse> findAll(String nome,Pageable pageable) {
+        return repository.findByNomeContaining(nome,pageable)            
+            .map(mapper::toResponse);                        
     }
 
     @Override
     public UnidadeResponse findUnitById(Long id) {
+        if(!repository.existsById(id)){
+            return new UnidadeResponse();
+        }
         return repository.findById(id)
             .map(mapper::toResponse)
             .orElseThrow(UnidadeNotFoundException::new);        

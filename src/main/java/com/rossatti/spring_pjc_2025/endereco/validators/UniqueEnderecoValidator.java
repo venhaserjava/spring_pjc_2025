@@ -2,7 +2,7 @@ package com.rossatti.spring_pjc_2025.endereco.validators;
 
 import org.springframework.stereotype.Component;
 
-import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
+import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
 import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;

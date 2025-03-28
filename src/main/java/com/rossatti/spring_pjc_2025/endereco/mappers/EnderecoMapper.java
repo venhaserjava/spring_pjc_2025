@@ -1,6 +1,6 @@
 package com.rossatti.spring_pjc_2025.endereco.mappers;
 
-import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
+import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;
 import com.rossatti.spring_pjc_2025.endereco.dtos.response.EnderecoResponse;
 import com.rossatti.spring_pjc_2025.endereco.entity.Endereco;

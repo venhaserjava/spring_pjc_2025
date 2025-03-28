@@ -8,7 +8,7 @@ import com.rossatti.spring_pjc_2025.unidade.dtos.response.UnidadeResponse;
 
 public interface UnidadeService {
 
-    Page<UnidadeResponse> findUnits(String unit,Pageable pageable);
+    Page<UnidadeResponse> findAll(String nome,Pageable pageable);
 
     UnidadeResponse findUnitById(Long id);
 

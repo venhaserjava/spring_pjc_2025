@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
+import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
 import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;

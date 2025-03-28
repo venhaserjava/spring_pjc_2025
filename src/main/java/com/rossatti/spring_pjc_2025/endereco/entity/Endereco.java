@@ -3,7 +3,7 @@ package com.rossatti.spring_pjc_2025.endereco.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.rossatti.spring_pjc_2025.cidade.entitys.Cidade;
+import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
 import com.rossatti.spring_pjc_2025.unidade.models.Unidade;
 

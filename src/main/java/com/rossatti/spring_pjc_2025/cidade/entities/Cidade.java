@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.cidade.entitys;
+package com.rossatti.spring_pjc_2025.cidade.entities;
 
 import java.util.List;
 
