@@ -1,5 +1,7 @@
 package com.rossatti.spring_pjc_2025.endereco.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,4 +17,11 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
         Integer numero,
         String bairro,
         Cidade cidade);
+    Optional<Endereco> findByTipoLogradouroAndLogradouroAndNumeroAndBairroAndCidadeId(        
+        String tipoLogradouro,
+        String logradouro,
+        Integer numero,
+        String bairro,
+        Long  cidadeId);
+
 }

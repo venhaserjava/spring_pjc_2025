@@ -63,6 +63,4 @@ public class Pessoa {
         inverseJoinColumns = @JoinColumn(name = "end_id")
     )
     private Set<Endereco> enderecos = new HashSet<>();
-
-
 }
