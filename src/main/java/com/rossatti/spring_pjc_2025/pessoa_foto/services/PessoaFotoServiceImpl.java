@@ -18,9 +18,9 @@ import com.rossatti.spring_pjc_2025.pessoa.exceptions.PessoaNotFoundException;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import com.rossatti.spring_pjc_2025.pessoa_foto.dtos.request.PessoaFotoRequest;
 import com.rossatti.spring_pjc_2025.pessoa_foto.dtos.response.PessoaFotoResponse;
+import com.rossatti.spring_pjc_2025.pessoa_foto.entities.PessoaFoto;
 import com.rossatti.spring_pjc_2025.pessoa_foto.exceptions.PessoaFotoNotFoundException;
 import com.rossatti.spring_pjc_2025.pessoa_foto.mappers.PessoaFotoMapper;
-import com.rossatti.spring_pjc_2025.pessoa_foto.models.PessoaFoto;
 import com.rossatti.spring_pjc_2025.pessoa_foto.repository.PessoaFotoRepository;
 
 import jakarta.transaction.Transactional;

@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.pessoa_foto.models;
+package com.rossatti.spring_pjc_2025.pessoa_foto.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

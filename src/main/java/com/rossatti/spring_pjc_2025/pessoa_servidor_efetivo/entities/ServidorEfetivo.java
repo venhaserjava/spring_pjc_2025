@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.entity;
+package com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.entities;
 
 import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 
