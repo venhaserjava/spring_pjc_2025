@@ -16,7 +16,7 @@ import com.rossatti.spring_pjc_2025.lotacao.repositories.LotacaoRepository;
 import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.models.ServidorTemporario;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.entities.ServidorTemporario;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.repositories.ServidorTemporarioRepository;
 import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
 import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeRepository;

@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.models;
+package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.entities;
 
 import java.time.LocalDate;
 
