@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
-import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
+import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
 
 import jakarta.persistence.Column;

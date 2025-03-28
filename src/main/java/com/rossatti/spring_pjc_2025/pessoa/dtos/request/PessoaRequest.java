@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.rossatti.spring_pjc_2025.commons.validators.UniqueValue;
-import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
+import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

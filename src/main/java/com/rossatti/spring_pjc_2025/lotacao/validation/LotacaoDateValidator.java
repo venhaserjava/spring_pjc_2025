@@ -2,7 +2,7 @@ package com.rossatti.spring_pjc_2025.lotacao.validation;
 
 
 import com.rossatti.spring_pjc_2025.lotacao.dtos.request.LotacaoRequest;
-import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
+import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

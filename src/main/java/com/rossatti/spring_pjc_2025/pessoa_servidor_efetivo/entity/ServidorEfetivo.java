@@ -1,6 +1,6 @@
 package com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.entity;
 
-import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
+import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

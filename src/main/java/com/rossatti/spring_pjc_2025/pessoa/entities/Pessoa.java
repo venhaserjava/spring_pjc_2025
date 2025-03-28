@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.pessoa.models;
+package com.rossatti.spring_pjc_2025.pessoa.entities;
 
 import java.time.LocalDate;
 import java.util.HashSet;

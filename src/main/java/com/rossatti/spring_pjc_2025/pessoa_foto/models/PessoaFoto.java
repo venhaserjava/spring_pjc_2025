@@ -1,9 +1,10 @@
 package com.rossatti.spring_pjc_2025.pessoa_foto.models;
 
-import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
+
+import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 
 @Entity
 @Table(name = "foto_pessoa")

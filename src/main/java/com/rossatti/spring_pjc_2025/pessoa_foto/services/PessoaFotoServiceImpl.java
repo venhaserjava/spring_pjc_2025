@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.exceptions.PessoaNotFoundException;
-import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import com.rossatti.spring_pjc_2025.pessoa_foto.dtos.request.PessoaFotoRequest;
 import com.rossatti.spring_pjc_2025.pessoa_foto.dtos.response.PessoaFotoResponse;

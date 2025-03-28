@@ -11,7 +11,7 @@ import static org.springframework.http.HttpStatus.*;
 
 import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
 import com.rossatti.spring_pjc_2025.lotacao.repositories.LotacaoRepository;
-import com.rossatti.spring_pjc_2025.pessoa.models.Pessoa;
+import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.request.ServidorEfetivoRequest;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.entity.ServidorEfetivo;
