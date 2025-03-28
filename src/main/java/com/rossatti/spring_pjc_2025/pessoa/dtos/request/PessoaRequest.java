@@ -38,8 +38,8 @@ public class PessoaRequest {
     @Size(min = 2, max = 200)
     private String mae;
 
-    @NotNull
-    @NotEmpty
+//    @NotNull
+//    @NotEmpty
     @Size(min = 3, max = 200)
     private String pai;
 
