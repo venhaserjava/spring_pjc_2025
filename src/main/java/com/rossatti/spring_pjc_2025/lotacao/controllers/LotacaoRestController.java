@@ -50,11 +50,11 @@ public class LotacaoRestController {
 
     // Listar todas as lotações
     @GetMapping(ApiRoutes.FIND_POSTING)
-    public ResponseEntity<Page<LotacaoResponse>> findAllPosting(
-//        @RequestParam(name = "q",required = false,defaultValue = "") String nome,
+    public ResponseEntity<Page<LotacaoResponse>> findAll(
+//        @RequestParam(name = "nome",required = false,defaultValue = "") String nome,
         @PageableDefault(size = 10, sort = "portaria", direction = Direction.ASC) Pageable pageable
     ) {
-        Page<LotacaoResponse> responses = lotacaoService.findAllPosting(pageable);
+        Page<LotacaoResponse> responses = lotacaoService.findAll(pageable);
         return ResponseEntity.ok(responses);
     }
 

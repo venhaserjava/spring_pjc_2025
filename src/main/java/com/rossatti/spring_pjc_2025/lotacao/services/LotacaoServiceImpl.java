@@ -81,39 +81,23 @@ public class LotacaoServiceImpl implements LotacaoService {
         lotacao = lotacaoRepository.save(lotacao);
 
         return lotacaoMapper.toResponse(lotacao);
-
     }
     @Override
     public LotacaoResponse findById(Long id) {
+        if (!lotacaoRepository.existsById(id)) {
+                return new LotacaoResponse();                
+        }
         return lotacaoRepository.findById(id)
             .map(lotacaoMapper::toResponse)
             .orElseThrow(LotacaoNotFoundException::new);
     }
-//     @Override
-//     @Transactional(readOnly = true)
-//     public LotacaoResponse findPostingById(Long id) {
-//         Lotacao lotacao = lotacaoRepository.findById(id)
-//                 .orElseThrow(() -> new LotacaoNotFoundException("Lotação não encontrada com ID: " + id));
-
-//         return lotacaoMapper.toResponse(lotacao)        ;        
-//     }
-
 
     @Override
     @Transactional(readOnly = true)
-    public Page<LotacaoResponse> findAllPosting(Pageable pageable) {
+    public Page<LotacaoResponse> findAll(Pageable pageable) {
             return lotacaoRepository.findAll(pageable)
                     .map(lotacaoMapper::toResponse);
         // return lotacaoRepository.findByNomeContaining(nome, pageable)
         //        .map(lotacaoMapper::toResponse) ;
     }
-
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        if (!lotacaoRepository.existsById(id)) {
-            throw new LotacaoNotFoundException("Lotação não encontrada com ID: " + id);
-        }
-        lotacaoRepository.deleteById(id);
-    }             
 }

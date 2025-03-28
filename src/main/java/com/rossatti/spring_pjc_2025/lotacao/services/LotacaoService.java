@@ -12,10 +12,8 @@ public interface LotacaoService {
 
     public LotacaoResponse update(Long id, LotacaoRequest request);
 
-//    LotacaoResponse findPostingById(Long id);
     public LotacaoResponse findById(Long id);
 
-    public Page<LotacaoResponse> findAllPosting(Pageable pageable);
-
-    public void delete(Long id);
+    public Page<LotacaoResponse> findAll(Pageable pageable);
+    
 }
