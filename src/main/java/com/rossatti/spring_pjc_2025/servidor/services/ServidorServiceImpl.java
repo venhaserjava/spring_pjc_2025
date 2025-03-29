@@ -1,9 +1,8 @@
 package com.rossatti.spring_pjc_2025.servidor.services;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,7 +57,7 @@ public class ServidorServiceImpl implements ServidorService {
     
     
     
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     @Override
     @Transactional
     public ServidorResponse create(ServidorRequest request) {
@@ -139,6 +138,10 @@ public class ServidorServiceImpl implements ServidorService {
         
 
         return servidorMapper.toResponse(pessoaData);
+    }
+
+    public boolean existsServidor(String nome,String mae, LocalDate dataNascimento ){
+        return pessoaRepository.existsByNomeAndMaeAndDataNascimento( nome, mae, dataNascimento );        
     }
 
 }

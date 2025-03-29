@@ -3,10 +3,7 @@ package com.rossatti.spring_pjc_2025.servidor.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
-//import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
-import com.rossatti.spring_pjc_2025.pessoa.services.PessoaService;
 import com.rossatti.spring_pjc_2025.pessoa_foto.services.PessoaFotoService;
 import com.rossatti.spring_pjc_2025.servidor.dtos.request.ServidorRequest;
 import com.rossatti.spring_pjc_2025.servidor.dtos.response.ServidorResponse;
@@ -46,26 +40,25 @@ public class ServidorRestController {
 
     private final String bucketName = "fotos";
 
-
 //    @PostMapping(consumes = {"multipart/form-data"})
-    public ResponseEntity<String> cadastrarServidor(
-        @RequestPart("pessoa") String pessoaJson,  // JSON vem como String
-        @RequestPart("foto") MultipartFile foto) {
+   //  public ResponseEntity<String> cadastrarServidor(
+   //      @RequestPart("pessoa") String pessoaJson,  // JSON vem como String
+   //      @RequestPart("foto") MultipartFile foto) {
 
-        try {
-            // Converter JSON recebido para o DTO ServidorRequest
-            ServidorRequest servidor = objectMapper.readValue(pessoaJson, ServidorRequest.class);
+   //      try {
+   //          // Converter JSON recebido para o DTO ServidorRequest
+   //          ServidorRequest servidor = objectMapper.readValue(pessoaJson, ServidorRequest.class);
 
-            // Debug: Exibir os dados convertidos
-            System.out.println("Nome: " + servidor.getNome());
-            System.out.println("Endereços: " + servidor.getEnderecos().size());
-            System.out.println("Foto recebida: " + foto.getOriginalFilename());
+   //          // Debug: Exibir os dados convertidos
+   //          System.out.println("Nome: " + servidor.getNome());
+   //          System.out.println("Endereços: " + servidor.getEnderecos().size());
+   //          System.out.println("Foto recebida: " + foto.getOriginalFilename());
 
-            return ResponseEntity.ok("Servidor cadastrado com sucesso!");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Erro ao processar requisição: " + e.getMessage());
-        }
-    }
+   //          return ResponseEntity.ok("Servidor cadastrado com sucesso!");
+   //      } catch (Exception e) {
+   //          return ResponseEntity.status(500).body("Erro ao processar requisição: " + e.getMessage());
+   //      }
+   //  }
 
    //@PostMapping(path = "/servidores",consumes = {"multipart/form-data"})
 //   @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -76,16 +69,7 @@ public class ServidorRestController {
             
    {
       ServidorRequest servidor = objectMapper.readValue(pessoaJson, ServidorRequest.class);
-//      System.out.println("JSON recebido: " + servidor);
-//      System.out.println("Foto recebida: " + foto.getOriginalFilename());
-//      ServidorResponse novaPessoa = new ServidorResponse();
       ServidorResponse novaPessoa = servidorService.create(servidor);
-//      pessoaFotoService.salvarFoto(novaPessoa, foto);
-      // EntityModel<PessoaDTO> resource = EntityModel.of(novaPessoa);
-      // resource.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PessoaController.class)
-      //            .criarPessoa(pessoaDTO, foto)).withSelfRel());
-      //  return ResponseEntity.status(HttpStatus.CREATED).body(resource);
-      //return ResponseEntity.ok().build();
    //---------------------------
    // FOR CODE_REVIEW
    //---------------------------
