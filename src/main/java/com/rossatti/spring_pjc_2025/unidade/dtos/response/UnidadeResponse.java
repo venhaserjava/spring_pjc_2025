@@ -13,4 +13,10 @@ public class UnidadeResponse {
     private Long id;
     private String nome;
     private String sigla;
+    private String tipoLogradouro;
+    private String logradouro;
+    private Integer numero;
+    private String bairro;
+    private String cidadeNome;
+        
 }

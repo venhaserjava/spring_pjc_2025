@@ -11,17 +11,28 @@ import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
-    Page<Endereco> findByLogradouroContaining(String logradouro, Pageable pageable);
+    Page<Endereco> findByLogradouroContaining(
+        String logradouro, 
+        Pageable pageable);
+
     boolean existsByLogradouroAndNumeroAndBairroAndCidade(
         String logradouro,
         Integer numero,
         String bairro,
         Cidade cidade);
+
     Optional<Endereco> findByTipoLogradouroAndLogradouroAndNumeroAndBairroAndCidadeId(        
         String tipoLogradouro,
         String logradouro,
         Integer numero,
         String bairro,
         Long  cidadeId);
+
+        boolean existsByTipoLogradouroAndLogradouroAndNumeroAndBairroAndCidadeId(        
+            String tipoLogradouro,
+            String logradouro,
+            Integer numero,
+            String bairro,
+            Long  cidadeId);    
 
 }

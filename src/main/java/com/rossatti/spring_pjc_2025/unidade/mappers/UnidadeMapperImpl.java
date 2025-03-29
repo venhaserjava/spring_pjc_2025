@@ -14,12 +14,25 @@ public class UnidadeMapperImpl implements UnidadeMapper {
 
         if (model==null) {
             return null;            
-        }
+        }        
+        // return UnidadeResponse.builder()
+        //     .id(model.getId())
+        //     .nome(model.getNome())
+        //     .sigla(model.getSigla())
+        //     .build();        
         return UnidadeResponse.builder()
-            .id(model.getId())
-            .nome(model.getNome())
-            .sigla(model.getSigla())
-            .build();        
+                .id(model.getId())
+                .nome(model.getNome())
+                .sigla(model.getSigla())
+                .tipoLogradouro(model.getEnderecos().iterator().next().getTipoLogradouro())
+                .logradouro(model.getEnderecos().iterator().next().getLogradouro())
+                .numero(model.getEnderecos().iterator().next().getNumero())
+                .bairro(model.getEnderecos().iterator().next().getBairro())
+                .cidadeNome(
+                    model.getEnderecos().iterator().next().getCidade().getNome()
+                    +" - "+
+                    model.getEnderecos().iterator().next().getCidade().getUf())                
+                .build();
     }
     @Override
     public Unidade toModel(UnidadeRequest request){

@@ -1,8 +1,11 @@
 package com.rossatti.spring_pjc_2025.unidade.dtos.request;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.rossatti.spring_pjc_2025.commons.validators.UniqueValue;
+import com.rossatti.spring_pjc_2025.servidor.dtos.request.ServidorEnderecoRequest;
 import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -32,4 +35,5 @@ public class UnidadeRequest {
     @UniqueValue(entityClass = Unidade.class, fieldName = "sigla", message = "Esta Sigla já está em uso.")       
     private String sigla;
 
+    private Set<ServidorEnderecoRequest> enderecos;    
 }

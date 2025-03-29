@@ -1,10 +1,12 @@
 package com.rossatti.spring_pjc_2025.unidade.entities;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
+import com.rossatti.spring_pjc_2025.servidor.dtos.request.ServidorEnderecoRequest;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,5 +60,5 @@ public class Unidade {
         joinColumns = @JoinColumn(name = "unid_id"),
         inverseJoinColumns = @JoinColumn(name = "end_id")
     )
-    private Set<Endereco> enderecos;
+    private Set<Endereco> enderecos = new HashSet<>();
 }

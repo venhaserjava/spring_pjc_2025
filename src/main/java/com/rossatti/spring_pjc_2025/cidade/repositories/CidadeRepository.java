@@ -18,6 +18,4 @@ public interface CidadeRepository extends JpaRepository<Cidade,Long> {
 
     Optional<Cidade> findByNomeAndUf(String nome, String uf);
 
-//    Cidade findByNomeAndUf(String name,String uf);
-
 }
