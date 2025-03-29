@@ -1,9 +1,12 @@
 package com.rossatti.spring_pjc_2025.servidor.mappers;
 
+import org.springframework.stereotype.Component;
+
 import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.servidor.dtos.request.ServidorRequest;
 import com.rossatti.spring_pjc_2025.servidor.dtos.response.ServidorResponse;
 
+@Component
 public class ServidorMapperImpl implements ServidorMapper {
 
     @Override
