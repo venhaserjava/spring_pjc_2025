@@ -53,64 +53,73 @@ public class UnidadeServiceImpl implements UnidadeService {
         if (request==null) {
             return null;            
         }
-        //----------------------------------
-        /// Tratando dados de Cidade
-        //----------------------------------      
-        Cidade cidadeData = new Cidade();
-        Optional<Cidade> cidade = cidadeRepository.findByNomeAndUf(
-            request.getEnderecos().iterator().next().getCidade().getNome(), 
-            request.getEnderecos().iterator().next().getCidade().getUf()
-        );
-        if (cidade.isEmpty()) {
-            cidadeData = cidadeRepository.save(
-                new Cidade(null, request.getEnderecos().iterator().next().getCidade().getNome(), 
-                                    request.getEnderecos().iterator().next().getCidade().getUf(), 
-                                    null
-                        )
-            );            
-        }
-        else {
-            BeanUtils.copyProperties(cidade.get(), cidadeData);
-        }
-        //--------------------------------------------
-        // Tratando dados de Endereco
-        //--------------------------------------------
-        Endereco enderecoData = new Endereco();
-        Optional<Endereco> endereco = enderecoRepository.findByTipoLogradouroAndLogradouroAndNumeroAndBairroAndCidadeId(
-            request.getEnderecos().iterator().next().getTipoLogradouro(),
-            request.getEnderecos().iterator().next().getLogradouro(),
-            request.getEnderecos().iterator().next().getNumero(),
-            request.getEnderecos().iterator().next().getBairro(),
-            cidadeData.getId()
-        );
-        if (endereco.isEmpty()) {
-            enderecoData = enderecoRepository.save(
-                new Endereco(null,  request.getEnderecos().iterator().next().getTipoLogradouro(),
-                                    request.getEnderecos().iterator().next().getLogradouro(), 
-                                    request.getEnderecos().iterator().next().getNumero(),
-                                    request.getEnderecos().iterator().next().getBairro(), 
-                                    cidadeData, 
-                                    null, 
-                                    null
-                     )
-            );                
-        }
-        else {
-            BeanUtils.copyProperties(endereco.get(), enderecoData);
-        }
-        var unidadeTocreate = new Unidade(null,
-                                            request.getNome(),
-                                            request.getSigla(),
-                                            null,
-                                            null);    
-            if (unidadeTocreate.getEnderecos() == null) {
-                unidadeTocreate.setEnderecos(new HashSet<>());
+        if ( repository.existsByNomeAndSigla(request.getNome(), request.getSigla() ) ) 
+        {
+            
+        
+            //----------------------------------
+            /// Tratando dados de Cidade
+            //----------------------------------      
+            Cidade cidadeData = new Cidade();
+            Optional<Cidade> cidade = cidadeRepository.findByNomeAndUf(
+                request.getEnderecos().iterator().next().getCidade().getNome(), 
+                request.getEnderecos().iterator().next().getCidade().getUf()
+            );
+            if (cidade.isEmpty()) {
+                cidadeData = cidadeRepository.save(
+                    new Cidade(null, request.getEnderecos().iterator().next().getCidade().getNome(), 
+                                        request.getEnderecos().iterator().next().getCidade().getUf(), 
+                                        null
+                            )
+                );            
             }
-            unidadeTocreate.getEnderecos().add(enderecoData);                                            
-//        var unidadeTocreate = mapper.toModel(request);
-        var unidadeCreated = repository.save(unidadeTocreate);
-        return mapper.toResponse(unidadeCreated);
+            else {
+                BeanUtils.copyProperties(cidade.get(), cidadeData);
+            }
+            //--------------------------------------------
+            // Tratando dados de Endereco
+            //--------------------------------------------
+            Endereco enderecoData = new Endereco();
+            Optional<Endereco> endereco = enderecoRepository.findByTipoLogradouroAndLogradouroAndNumeroAndBairroAndCidadeId(
+                request.getEnderecos().iterator().next().getTipoLogradouro(),
+                request.getEnderecos().iterator().next().getLogradouro(),
+                request.getEnderecos().iterator().next().getNumero(),
+                request.getEnderecos().iterator().next().getBairro(),
+                cidadeData.getId()
+            );
+            if (endereco.isEmpty()) {
+                enderecoData = enderecoRepository.save(
+                    new Endereco(null,  request.getEnderecos().iterator().next().getTipoLogradouro(),
+                                        request.getEnderecos().iterator().next().getLogradouro(), 
+                                        request.getEnderecos().iterator().next().getNumero(),
+                                        request.getEnderecos().iterator().next().getBairro(), 
+                                        cidadeData, 
+                                        null, 
+                                        null
+                        )
+                );                
+            }
+            else {
+                BeanUtils.copyProperties(endereco.get(), enderecoData);
+            }
+            var unidadeTocreate = new Unidade(null,
+                                                request.getNome(),
+                                                request.getSigla(),
+                                                null,
+                                                null);    
+                if (unidadeTocreate.getEnderecos() == null) {
+                    unidadeTocreate.setEnderecos(new HashSet<>());
+                }
+                unidadeTocreate.getEnderecos().add(enderecoData);                                            
+    //        var unidadeTocreate = mapper.toModel(request);
+            var unidadeCreated = repository.save(unidadeTocreate);
+            return mapper.toResponse(unidadeCreated);
+            
+        } else {
+            return new UnidadeResponse();
+        }       
     }
+
     @Override
     public UnidadeResponse update(Long id, UnidadeRequest request) {
         if (id==null || request==null) {
