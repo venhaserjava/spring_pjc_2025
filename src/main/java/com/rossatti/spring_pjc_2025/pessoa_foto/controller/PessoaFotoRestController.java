@@ -1,9 +1,6 @@
 package com.rossatti.spring_pjc_2025.pessoa_foto.controller;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
 
 
 import com.rossatti.spring_pjc_2025.pessoa_foto.services.PessoaFotoService;
@@ -38,7 +35,7 @@ public class PessoaFotoRestController {
 
     private final String bucketName = "fotos";
 
-    private static final Logger logger = LoggerFactory.getLogger(PessoaFotoRestController.class);
+//    private static final Logger logger = LoggerFactory.getLogger(PessoaFotoRestController.class);
 
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -80,9 +77,9 @@ public class PessoaFotoRestController {
     public ResponseEntity<String> obterLinkTemporario(@PathVariable String hash) {
         try {
             
-            String objectName = hash + ".jpg";
-            logger.info("Gerando link para objeto: " + objectName);
-            logger.info("Bucket: " + bucketName);            
+            //String objectName = hash + ".jpg";
+            // logger.info("Gerando link para objeto: " + objectName);
+            // logger.info("Bucket: " + bucketName);            
 
             String url = minioClient.getPresignedObjectUrl(
                 GetPresignedObjectUrlArgs.builder()
@@ -92,10 +89,10 @@ public class PessoaFotoRestController {
                     .expiry(300)
                     .build()
             );
-            logger.info("Link gerado com sucesso: " + url);
+//            logger.info("Link gerado com sucesso: " + url);
             return ResponseEntity.ok(url);
         } catch (Exception e) {
-            logger.error("Erro ao gerar link temporário: ", e);
+//            logger.error("Erro ao gerar link temporário: ", e);
             return ResponseEntity.status(500).body("Erro ao gerar link temporário: " + e.getMessage());
         }
     }
