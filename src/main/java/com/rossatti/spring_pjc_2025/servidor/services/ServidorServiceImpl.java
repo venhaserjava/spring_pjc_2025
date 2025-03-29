@@ -1,6 +1,8 @@
 package com.rossatti.spring_pjc_2025.servidor.services;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -56,6 +58,7 @@ public class ServidorServiceImpl implements ServidorService {
     
     
     
+    @SuppressWarnings("unchecked")
     @Override
     @Transactional
     public ServidorResponse create(ServidorRequest request) {
@@ -77,7 +80,7 @@ public class ServidorServiceImpl implements ServidorService {
             );            
         }
         else {
-            BeanUtils.copyProperties(cidade, cidadeData);
+            BeanUtils.copyProperties(cidade.get(), cidadeData);
         }
 
         //--------------------------------------------
@@ -104,7 +107,7 @@ public class ServidorServiceImpl implements ServidorService {
             );                
         }
         else {
-            BeanUtils.copyProperties(endereco, enderecoData);
+            BeanUtils.copyProperties(endereco.get(), enderecoData);
         }
         //--------------------------------------------
         // Tratando dados de Pessoa (Servidor)
@@ -123,10 +126,15 @@ public class ServidorServiceImpl implements ServidorService {
                                                 null, 
                                                 null);
             pessoaData =  pessoaRepository.save(pessoaToCreate);
+            if (pessoaData.getEnderecos() == null) {
+                pessoaData.setEnderecos(new HashSet<>());
+            }
             pessoaData.getEnderecos().add(enderecoData);
+
+//            pessoaData.getEnderecos().add(enderecoData);
             pessoaRepository.save(pessoaData);    
         } else {
-            BeanUtils.copyProperties(pessoa, pessoaData);
+            BeanUtils.copyProperties(pessoa.get(), pessoaData);
         }       
         
 

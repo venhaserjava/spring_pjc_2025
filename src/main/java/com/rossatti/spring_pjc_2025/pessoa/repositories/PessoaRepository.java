@@ -21,4 +21,9 @@ public interface PessoaRepository extends JpaRepository<Pessoa,Long> {
         String mae,
         LocalDate dataNascimento
     );
+    boolean existsByNomeAndMaeAndDataNascimento(
+        String nome,
+        String mae,
+        LocalDate dataNascimento
+    );
 }

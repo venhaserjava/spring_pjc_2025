@@ -33,6 +33,5 @@ public class ServidorEnderecoRequest {
     @Size(max = 100, message = "O bairro deve ter no máximo 100 caracteres")
     private String bairro;
 
-//    @NotNull(message = "O ID da cidade é obrigatório")    
     private ServidorCidadeRequest cidade;
 }

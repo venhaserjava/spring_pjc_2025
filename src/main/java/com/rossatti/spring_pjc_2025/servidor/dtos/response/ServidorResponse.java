@@ -27,6 +27,7 @@ public class ServidorResponse {
     private Integer numero;
     private String bairro;
     private String cidadeNome;
+    private String foto;
 
 }
 

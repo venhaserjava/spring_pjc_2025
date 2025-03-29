@@ -44,7 +44,6 @@ public class PessoaFotoRestController {
         try {
             String hash = pessoaFotoService.generateHash(file);
             String fileName = hash + ".png";
-//            String objectName = bucketName+"/" + fileName; // Certifique-se de incluir a pasta correta
 
 
             if (!minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build())) {
@@ -75,11 +74,7 @@ public class PessoaFotoRestController {
 
     @GetMapping("/link/{hash}")
     public ResponseEntity<String> obterLinkTemporario(@PathVariable String hash) {
-        try {
-            
-            //String objectName = hash + ".jpg";
-            // logger.info("Gerando link para objeto: " + objectName);
-            // logger.info("Bucket: " + bucketName);            
+        try {            
 
             String url = minioClient.getPresignedObjectUrl(
                 GetPresignedObjectUrlArgs.builder()
