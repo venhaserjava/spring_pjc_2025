@@ -7,5 +7,5 @@ import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.entities.Servidor
 
 @Repository
 public interface ServidorTemporarioRepository  extends JpaRepository<ServidorTemporario,Long> {
-
+    boolean existsByPessoaIdAndDataDemissaoIsNull(Long pessoaId);
 }

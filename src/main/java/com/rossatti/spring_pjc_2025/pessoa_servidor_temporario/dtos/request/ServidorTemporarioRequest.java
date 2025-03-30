@@ -1,6 +1,6 @@
 package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request;
 
-import com.rossatti.spring_pjc_2025.lotacao.dtos.LotacaoDTO;
+//import com.rossatti.spring_pjc_2025.lotacao.dtos.LotacaoDTO;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotNull;
@@ -23,7 +23,7 @@ public class ServidorTemporarioRequest {
     @NotNull(message = "A data de admissão é obrigatória.")
     private LocalDate dataAdmissao;
 
-    @NotNull(message = "Os dados de lotação são obrigatórios.")
-    private LotacaoDTO lotacao;
+//    @NotNull(message = "Os dados de lotação são obrigatórios.")
+//    private LotacaoDTO lotacao;
 
 }
