@@ -53,8 +53,7 @@ public class ServidorServiceImpl implements ServidorService {
     public ServidorResponse update(Long id, ServidorRequest request) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-    
+    }    
     
     
     //@SuppressWarnings("unchecked")
@@ -120,7 +119,7 @@ public class ServidorServiceImpl implements ServidorService {
             Pessoa pessoaToCreate = new Pessoa(null,   request.getNome(), 
                                                 request.getMae(), 
                                                 request.getPai(), 
-                                                request.getSexo(), 
+                                                request.getSexo().toUpperCase(), 
                                                 request.getDataNascimento(), 
                                                 null, 
                                                 null);

@@ -37,6 +37,11 @@ public class ApiRoutes {
     public static final String CREATE_ADDRESS = API+ADDRESSES;
     public static final String UPDATE_ADDRESS = API+ADDRESSES+"/{id}";
 
+    public static final String SERVANT_TEMP = "/servidores-temporarios";    
+    public static final String SERVANT_TEMP_FIND = API+SERVANT_TEMP;
+    public static final String SERVANT_TEMP_CREATE = API+SERVANT_TEMP;
+    public static final String SERVANT_TEMP_UPDATE = API+SERVANT_TEMP+"/{id}";
+    public static final String SERVANT_TEMP_FIND_BY_ID = SERVANT_TEMP_FIND +"/{id}";
 
 
 }
