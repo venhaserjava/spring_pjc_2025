@@ -20,8 +20,10 @@ public class ServidorTemporarioRequest {
     @NotNull(message = "O ID da pessoa é obrigatório.")
     private Long pessoaId;
 
-    @NotNull(message = "A data de admissão é obrigatória.")
+//    @NotNull(message = "A data de admissão é obrigatória.")
     private LocalDate dataAdmissao;
+
+    private LocalDate dataDemissao;
 
 //    @NotNull(message = "Os dados de lotação são obrigatórios.")
 //    private LotacaoDTO lotacao;

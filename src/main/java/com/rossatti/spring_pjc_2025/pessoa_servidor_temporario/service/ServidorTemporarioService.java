@@ -7,5 +7,5 @@ import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.Serv
 public interface ServidorTemporarioService {
 
     void cadastrarServidorTemporario(ServidorTemporarioRequest dto);
-
+    void update(Long id ,ServidorTemporarioRequest dto);
 }
