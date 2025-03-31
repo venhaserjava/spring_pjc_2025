@@ -16,9 +16,24 @@ import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
 public interface LotacaoRepository  extends JpaRepository<Lotacao,Long>{
      List<Lotacao> findByDataLotacaoAfter(LocalDate data);
      Page<Lotacao> findByUnidadeId(Long unidId,Pageable pageable);     
-     // @Query("SELECT l FROM Lotacao l WHERE l.unidade.id = :unidadeId ORDER BY l.unidade.nome")
-     // Page<Lotacao> findByUnidadeId(@Param("unidadeId") Long unidadeId, Pageable pageable);         
-     Long countByUnidadeId(Long unidadeId)     ;
-     List<Lotacao> findByPessoaNomeContaining(String nome);
+     Long countByUnidadeId(Long unidadeId)  ;
+     @Query("""
+          SELECT l FROM Lotacao l
+          JOIN l.pessoa p
+          JOIN l.unidade u
+          JOIN u.unidadeEndereco ue
+          JOIN ue.endereco e
+          WHERE LOWER(p.nome) LIKE LOWER(CONCAT('%', :nome, '%'))
+          """)
+     Page<Lotacao> findByPessoaNomeContaining(@Param("nome") String nome, Pageable pageable);
+          
+     // @Query("""
+     // SELECT l FROM Lotacao l
+     // JOIN l.pessoa p
+     // JOIN l.unidade u
+     // JOIN u.endereco e
+     // WHERE LOWER(p.nome) LIKE LOWER(CONCAT('%', :nome, '%'))
+     // """)
+     // Page<Lotacao> findByPessoaNomeContaining(@Param("nome") String nome, Pageable pageable);     
 }
-//xx     Page<Lotacao> findByNomeContaining(String nome,Pageable pageable);
+

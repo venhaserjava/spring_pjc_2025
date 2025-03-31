@@ -19,20 +19,22 @@ public class UnidadeMapperImpl implements UnidadeMapper {
         //     .id(model.getId())
         //     .nome(model.getNome())
         //     .sigla(model.getSigla())
-        //     .build();        
-        return UnidadeResponse.builder()
+        //     .build();   
+        UnidadeResponse unidadeResponse = UnidadeResponse.builder()
                 .id(model.getId())
                 .nome(model.getNome())
-                .sigla(model.getSigla())
-                .tipoLogradouro(model.getEnderecos().iterator().next().getTipoLogradouro())
-                .logradouro(model.getEnderecos().iterator().next().getLogradouro())
-                .numero(model.getEnderecos().iterator().next().getNumero())
-                .bairro(model.getEnderecos().iterator().next().getBairro())
+                .sigla(model.getSigla())                
+                .tipoLogradouro(model.getUnidadeEndereco().getEndereco().getTipoLogradouro())
+                .logradouro(model.getUnidadeEndereco().getEndereco().getLogradouro())
+                .numero(model.getUnidadeEndereco().getEndereco().getNumero())
+                .bairro(model.getUnidadeEndereco().getEndereco().getBairro())
                 .cidadeNome(
-                    model.getEnderecos().iterator().next().getCidade().getNome()
+                        model.getUnidadeEndereco().getEndereco().getCidade().getNome()
                     +" - "+
-                    model.getEnderecos().iterator().next().getCidade().getUf())                
+                        model.getUnidadeEndereco().getEndereco().getCidade().getUf()
+                )
                 .build();
+        return  unidadeResponse;      
     }
     @Override
     public Unidade toModel(UnidadeRequest request){

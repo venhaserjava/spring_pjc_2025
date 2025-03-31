@@ -14,8 +14,6 @@ public interface UnidadeService {
 
     UnidadeResponse create(UnidadeRequest request);
 
-    UnidadeResponse update(Long id,UnidadeRequest request);
-
-    boolean existUnit(String nome,String sigla);
+    UnidadeResponse update(Long id,UnidadeRequest request);    
 
 }

@@ -1,5 +1,6 @@
 package com.rossatti.spring_pjc_2025.lotacao.services;
 
+import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.lotacao.dtos.request.LotacaoRequest;
 import com.rossatti.spring_pjc_2025.lotacao.dtos.response.LotacaoResponse;
 import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
@@ -9,9 +10,14 @@ import com.rossatti.spring_pjc_2025.lotacao.repositories.LotacaoRepository;
 import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.exceptions.PessoaNotFoundException;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.response.EnderecoFuncionalResponseDTO;
 import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
+import com.rossatti.spring_pjc_2025.unidade.entities.UnidadeEndereco;
 import com.rossatti.spring_pjc_2025.unidade.exceptions.UnidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -93,11 +99,49 @@ public class LotacaoServiceImpl implements LotacaoService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+//    @Transactional(readOnly = true)
     public Page<LotacaoResponse> findAll(Pageable pageable) {
             return lotacaoRepository.findAll(pageable)
                     .map(lotacaoMapper::toResponse);
         // return lotacaoRepository.findByNomeContaining(nome, pageable)
         //        .map(lotacaoMapper::toResponse) ;
     }
-}
+
+    public Page<EnderecoFuncionalResponseDTO> buscarEnderecoFuncionalPorNome(String nome, Pageable pageable) {
+        Page<Lotacao> lotacaoPage = lotacaoRepository.findByPessoaNomeContaining(nome, pageable);
+
+        return lotacaoPage.map(lotacao -> {
+                Unidade unidade = lotacao.getUnidade();
+                UnidadeEndereco unidadeEndereco = unidade.getUnidadeEndereco(); // Buscar via tabela intermediária
+                Endereco endereco = unidadeEndereco != null ? unidadeEndereco.getEndereco() : null;
+
+                return new EnderecoFuncionalResponseDTO(
+                lotacao.getPessoa().getNome(),
+                unidade.getNome(),
+                endereco != null ? endereco.getLogradouro() : "Não informado",
+                endereco != null ? endereco.getNumero() : 0,
+                endereco != null ? endereco.getBairro() : "Não informado",
+                endereco != null ? endereco.getCidade().getNome() : "Não informado",
+                endereco != null ? endereco.getCidade().getUf() : "Não informado"
+                );
+        });
+    }
+
+/*
+    public Page<EnderecoFuncionalResponseDTO> buscarEnderecoFuncionalPorNome(String nome, Pageable pageable) {
+        Page<Lotacao> lotacaoPage = lotacaoRepository.findByPessoaNomeContaining(nome, pageable);
+
+        return lotacaoPage.map(lotacao -> new EnderecoFuncionalResponseDTO(
+                lotacao.getPessoa().getNome()
+                ,lotacao.getUnidade().getNome()
+                ,lotacao.getUnidade().getEndereco().getLogradouro()
+                ,lotacao.getUnidade().getEndereco().getNumero()
+                ,lotacao.getUnidade().getEndereco().getBairro()
+                ,lotacao.getUnidade().getEndereco().getCidade().getNome()
+                ,lotacao.getUnidade().getEndereco().getCidade().getUf()
+                )
+        );
+    }
+*/        
+
+}    

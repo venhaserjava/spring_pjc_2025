@@ -1,5 +1,7 @@
 package com.rossatti.spring_pjc_2025.endereco.mappers;
 
+import java.util.HashSet;
+
 //import java.util.HashSet;
 
 import org.springframework.stereotype.Component;
@@ -20,16 +22,16 @@ public class EnderecoMapperImpl implements EnderecoMapper {
             return null;
         }
 //        return new Endereco(null, dto.getTipoLogradouro(), dto.getLogradouro(), dto.getNumero(), dto.getBairro(), cidade,new HashSet<>(),new HashSet<>());
-        return new Endereco(null, dto.getTipoLogradouro(), dto.getLogradouro(), dto.getNumero(), dto.getBairro(), cidade,null,null);
+//        return new Endereco(null, dto.getTipoLogradouro(), dto.getLogradouro(), dto.getNumero(), dto.getBairro(), cidade,null,null);
         
-    //     return Endereco.builder()
-    //         .tipoLogradouro(dto.getTipoLogradouro())
-    //         .logradouro(dto.getLogradouro())
-    //         .numero(dto.getNumero())
-    //         .bairro(dto.getBairro())
-    //         .cidade(cidade)
-    //         .unidades(new HashSet<>()) // Evita null
-    //         .build();
+        return Endereco.builder()
+            .tipoLogradouro(dto.getTipoLogradouro())
+            .logradouro(dto.getLogradouro())
+            .numero(dto.getNumero())
+            .bairro(dto.getBairro())
+            .cidade(cidade)
+            .unidadeEnderecos(new HashSet<>()) // Evita null
+            .build();
      }
 
     @Override

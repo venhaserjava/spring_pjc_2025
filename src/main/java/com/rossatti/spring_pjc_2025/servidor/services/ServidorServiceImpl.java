@@ -93,16 +93,29 @@ public class ServidorServiceImpl implements ServidorService {
             cidadeData.getId()
         );
         if (endereco.isEmpty()) {
+            // enderecoData = enderecoRepository.save(
+            //     new Endereco(null,  request.getEnderecos().iterator().next().getTipoLogradouro(),
+            //                         request.getEnderecos().iterator().next().getLogradouro(), 
+            //                         request.getEnderecos().iterator().next().getNumero(),
+            //                         request.getEnderecos().iterator().next().getBairro(), 
+            //                         cidadeData, 
+            //                         new HashSet<>(), 
+            //                         new HashSet<>()
+            //          )
+            // );                
             enderecoData = enderecoRepository.save(
-                new Endereco(null,  request.getEnderecos().iterator().next().getTipoLogradouro(),
-                                    request.getEnderecos().iterator().next().getLogradouro(), 
-                                    request.getEnderecos().iterator().next().getNumero(),
-                                    request.getEnderecos().iterator().next().getBairro(), 
-                                    cidadeData, 
-                                    null, 
-                                    null
-                     )
-            );                
+            Endereco.builder()
+                .tipoLogradouro(request.getEnderecos().iterator().next().getTipoLogradouro())
+                .logradouro(request.getEnderecos().iterator().next().getLogradouro())
+                .numero(request.getEnderecos().iterator().next().getNumero())
+                .bairro(request.getEnderecos().iterator().next().getBairro())
+                .cidade(cidadeData)
+//                .unidades(new HashSet<>())
+                .unidadeEnderecos(new HashSet<>())
+//                .pessoas(new HashSet<>())
+                .build()
+            );
+
         }
         else {
             BeanUtils.copyProperties(endereco.get(), enderecoData);

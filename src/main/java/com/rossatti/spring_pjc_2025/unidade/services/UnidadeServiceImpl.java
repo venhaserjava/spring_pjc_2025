@@ -1,9 +1,6 @@
 package com.rossatti.spring_pjc_2025.unidade.services;
 
 import java.util.HashSet;
-import java.util.Optional;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,10 +12,13 @@ import com.rossatti.spring_pjc_2025.endereco.repositories.EnderecoRepository;
 import com.rossatti.spring_pjc_2025.unidade.dtos.request.UnidadeRequest;
 import com.rossatti.spring_pjc_2025.unidade.dtos.response.UnidadeResponse;
 import com.rossatti.spring_pjc_2025.unidade.entities.Unidade;
+import com.rossatti.spring_pjc_2025.unidade.entities.UnidadeEndereco;
 import com.rossatti.spring_pjc_2025.unidade.exceptions.UnidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.unidade.mappers.UnidadeMapper;
+import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeEnderecoRepository;
 import com.rossatti.spring_pjc_2025.unidade.repositories.UnidadeRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +30,7 @@ public class UnidadeServiceImpl implements UnidadeService {
     private final UnidadeMapper mapper;
     private final CidadeRepository cidadeRepository;
     private final EnderecoRepository enderecoRepository;
+    private final UnidadeEnderecoRepository unidadeEnderecoRepository;
 
     @Override
     public Page<UnidadeResponse> findAll(String nome,Pageable pageable) {
@@ -50,13 +51,91 @@ public class UnidadeServiceImpl implements UnidadeService {
     @Override
     @Transactional
     public UnidadeResponse create(UnidadeRequest request) {
+        if (request == null) {
+            return null;
+        }
+        
+        if (!repository.existsByNomeAndSigla(request.getNome(), request.getSigla())) { 
+            //----------------------------------
+            /// Tratando dados de Cidade
+            //---------------------------------- 
+            Cidade cidadeData = cidadeRepository
+                .findByNomeAndUf(request.getEnderecos().iterator().next().getCidade().getNome(), 
+                                 request.getEnderecos().iterator().next().getCidade().getUf())
+                .orElseGet(() -> cidadeRepository.save(new Cidade(null, 
+                                                                  request.getEnderecos().iterator().next().getCidade().getNome(), 
+                                                                  request.getEnderecos().iterator().next().getCidade().getUf(), 
+                                                                  null)));
+    
+            //--------------------------------------------
+            // Tratando dados de Endereco
+            //--------------------------------------------
+            Endereco enderecoData = enderecoRepository
+                .findByTipoLogradouroAndLogradouroAndNumeroAndBairroAndCidadeId(
+                    request.getEnderecos().iterator().next().getTipoLogradouro(),
+                    request.getEnderecos().iterator().next().getLogradouro(),
+                    request.getEnderecos().iterator().next().getNumero(),
+                    request.getEnderecos().iterator().next().getBairro(),
+                    cidadeData.getId()
+                ).orElseGet(() -> enderecoRepository.save(Endereco.builder()
+                    .tipoLogradouro(request.getEnderecos().iterator().next().getTipoLogradouro())
+                    .logradouro(request.getEnderecos().iterator().next().getLogradouro())
+                    .numero(request.getEnderecos().iterator().next().getNumero())
+                    .bairro(request.getEnderecos().iterator().next().getBairro())
+                    .cidade(cidadeData)
+                    .unidadeEnderecos(new HashSet<>()) 
+                    .build()));
+    
+            // Criando a unidade sem associação direta ao endereço
+            var unidadeTocreate = repository.save(new Unidade(
+                null,
+                request.getNome(),
+                request.getSigla(),
+                null, // Lista de lotações inicializada como null
+                null // Relação com UnidadeEndereco ainda não definida
+            ));
+    
+            // Criando a relação intermediária UnidadeEndereco
+            var unidadeEndereco = new UnidadeEndereco(null, unidadeTocreate, enderecoData);
+    
+            // Salvando a relação intermediária após a unidade já estar salva
+            unidadeEndereco = unidadeEnderecoRepository.save(unidadeEndereco);
+    
+            // Associando a relação intermediária à unidade salva
+            unidadeTocreate.setUnidadeEndereco(unidadeEndereco);
+    
+            return mapper.toResponse(unidadeTocreate);
+        } 
+    
+        return new UnidadeResponse();
+    }
+
+    @Override
+    @Transactional
+    public UnidadeResponse update(Long id, UnidadeRequest request) {
+        // Verifica se a unidade existe
+        Unidade unidade = repository.findById(id)
+            .orElseThrow(() -> new EntityNotFoundException("Unidade não encontrada com ID: " + id));
+
+        // Atualiza os campos permitidos
+        unidade.setNome(request.getNome());
+        unidade.setSigla(request.getSigla());
+
+        // Salva e retorna a unidade atualizada
+        Unidade unidadeAtualizada = repository.save(unidade);
+        return mapper.toResponse(unidadeAtualizada);
+    }
+
+/*   
+    @Override
+    @Transactional
+
+    public UnidadeResponse create(UnidadeRequest request) {
         if (request==null) {
             return null;            
         }
         if ( ! repository.existsByNomeAndSigla(request.getNome(), request.getSigla() ) ) 
-        {
-            
-        
+        {                   
             //----------------------------------
             /// Tratando dados de Cidade
             //----------------------------------      
@@ -89,31 +168,34 @@ public class UnidadeServiceImpl implements UnidadeService {
             );
             if (endereco.isEmpty()) {
                 enderecoData = enderecoRepository.save(
-                    new Endereco(null,  request.getEnderecos().iterator().next().getTipoLogradouro(),
-                                        request.getEnderecos().iterator().next().getLogradouro(), 
-                                        request.getEnderecos().iterator().next().getNumero(),
-                                        request.getEnderecos().iterator().next().getBairro(), 
-                                        cidadeData, 
-                                        null, 
-                                        null
-                        )
-                );                
+                    Endereco.builder()
+                    .tipoLogradouro(request.getEnderecos().iterator().next().getTipoLogradouro())
+                    .logradouro(request.getEnderecos().iterator().next().getLogradouro())
+                    .numero(request.getEnderecos().iterator().next().getNumero())
+                    .bairro(request.getEnderecos().iterator().next().getBairro())
+                    .cidade(cidadeData)
+                    .unidadeEnderecos(new HashSet<>())    
+                    .build()
+                    );
             }
             else {
                 BeanUtils.copyProperties(endereco.get(), enderecoData);
             }
-            var unidadeTocreate = new Unidade(null,
-                                                request.getNome(),
-                                                request.getSigla(),
-                                                null,
-                                                null);    
-                if (unidadeTocreate.getEnderecos() == null) {
-                    unidadeTocreate.setEnderecos(new HashSet<>());
-                }
-                unidadeTocreate.getEnderecos().add(enderecoData);                                            
-    //        var unidadeTocreate = mapper.toModel(request);
+            // Criando a unidade sem associação direta ao endereço
+            var unidadeTocreate = new Unidade(
+                null,
+                request.getNome(),
+                request.getSigla(),
+                null, // Lista de lotações inicializada como null
+                null  // Relação com UnidadeEndereco ainda não definida
+            );
+            // Criando a relação intermediária UnidadeEndereco
+            var unidadeEndereco = new UnidadeEndereco(null, unidadeTocreate, enderecoData);
+            // Associando a relação intermediária à unidade
+            unidadeTocreate.setUnidadeEndereco(unidadeEndereco);
             var unidadeCreated = repository.save(unidadeTocreate);
             return mapper.toResponse(unidadeCreated);
+//            return new UnidadeResponse();
             
         } else {
             return new UnidadeResponse();
@@ -137,5 +219,5 @@ public class UnidadeServiceImpl implements UnidadeService {
     public boolean existUnit(String nome, String sigla) {
         return repository.existsByNomeAndSigla(nome, sigla);
     }
-
+*/
 }

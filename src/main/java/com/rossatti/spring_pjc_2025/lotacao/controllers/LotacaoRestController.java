@@ -5,7 +5,11 @@ import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
 import com.rossatti.spring_pjc_2025.lotacao.dtos.request.LotacaoRequest;
 import com.rossatti.spring_pjc_2025.lotacao.dtos.response.LotacaoResponse;
 import com.rossatti.spring_pjc_2025.lotacao.services.LotacaoService;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.response.EnderecoFuncionalResponseDTO;
+
 import jakarta.validation.Valid;
+
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,4 +68,15 @@ public class LotacaoRestController {
     //     lotacaoService.delete(id);
     //     return ResponseEntity.noContent().build();
     // }
+
+    @GetMapping("/endereco-funcional")
+    public ResponseEntity<Page<EnderecoFuncionalResponseDTO>> buscarEnderecoFuncional(
+        @RequestParam String nome,
+        @PageableDefault(size = 10, sort = "pessoa.nome", direction = Direction.ASC) Pageable pageable
+    ) {
+        Page<EnderecoFuncionalResponseDTO> enderecos = lotacaoService.buscarEnderecoFuncionalPorNome(nome, pageable);
+        return ResponseEntity.ok(enderecos);
+    }
+
+
 }

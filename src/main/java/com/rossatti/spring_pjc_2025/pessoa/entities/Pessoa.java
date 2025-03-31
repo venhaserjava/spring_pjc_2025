@@ -62,5 +62,5 @@ public class Pessoa {
         joinColumns = @JoinColumn(name = "pes_id"),
         inverseJoinColumns = @JoinColumn(name = "end_id")
     )
-    private Set<Endereco> enderecos = new HashSet<>();
+    private Set<Endereco> enderecos;// = new HashSet<>();
 }
