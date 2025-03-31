@@ -1,12 +1,15 @@
 package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioDTO;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioResponse;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.service.ServidorTemporarioService;
 //import jakarta.validation.Valid;
@@ -28,6 +31,14 @@ public class ServidorTemporarioController {
         return ResponseEntity.ok(servidorTemporarioService.findByPessoaId(id));
     }
 
+    @GetMapping(ApiRoutes.SERVANT_TEMP_FIND)
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+    public ResponseEntity<Page<ServidorTemporarioDTO>> findAll(
+        @RequestParam(required = false) String nome,
+        Pageable pageable
+    ) {
+        return ResponseEntity.ok( servidorTemporarioService.findAllServidoresTemporarios(nome, pageable) ) ;
+    }
 
     @PostMapping(ApiRoutes.SERVANT_TEMP_CREATE)
     @ResponseStatus(code = HttpStatus.CREATED)

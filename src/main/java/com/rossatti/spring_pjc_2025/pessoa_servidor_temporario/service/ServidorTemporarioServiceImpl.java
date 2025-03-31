@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import jakarta.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import static org.springframework.http.HttpStatus.*;
@@ -15,6 +17,7 @@ import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.repositories.ServidorEfetivoRepository;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioDTO;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioResponse;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.entities.ServidorTemporario;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.mappers.ServidorTemporarioMapper;
@@ -41,6 +44,7 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
     }
     
     public ServidorTemporarioResponse findByPessoaId(Long pessoaId){
+        
         Optional<Pessoa> pessoaOpt = pessoaRepository.findById(pessoaId);
         Optional<ServidorTemporario> servTempOpt = servidorTemporarioRepository.findByPessoaIdAndDataDemissaoIsNull(pessoaId);
         if (pessoaOpt.isEmpty() || servTempOpt.isEmpty()) {
@@ -48,6 +52,12 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
         }
         return mapper.toResponse(pessoaOpt.get(),servTempOpt.get());
     }
+
+    public Page<ServidorTemporarioDTO> findAllServidoresTemporarios(String nome, Pageable pageable) {
+            Page<ServidorTemporario> servidores = servidorTemporarioRepository.findAllByDataDemissaoIsNull(pageable);
+            return servidores.map(this::mapToDTO);
+    }
+
 
     @Transactional
     public void create(ServidorTemporarioRequest dto) {
@@ -157,6 +167,7 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
         }
         return true;
     }
+
     private boolean getValidaDemissao(ServidorTemporarioRequest dto){
 
         if (dto.getDataDemissao()==null) {
@@ -167,4 +178,26 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
         }
         return true;
     }
+
+    public ServidorTemporarioDTO mapToDTO(ServidorTemporario servidorTemporario) {
+        Pessoa pessoa = servidorTemporario.getPessoa();
+        return new ServidorTemporarioDTO(
+            pessoa.getId(),
+            pessoa.getNome(),
+            pessoa.getMae(),
+            pessoa.getPai(),
+            pessoa.getSexo(),
+            pessoa.getDataNascimento(),
+            pessoa.getEnderecos().iterator().next().getTipoLogradouro(),
+            pessoa.getEnderecos().iterator().next().getLogradouro(),
+            pessoa.getEnderecos().iterator().next().getNumero(),
+            pessoa.getEnderecos().iterator().next().getBairro(),
+            pessoa.getEnderecos().iterator().next().getCidade().getNome(),
+            "Servidor_Temporário",
+            servidorTemporario.getDataAdmissao(),
+            servidorTemporario.getDataDemissao()
+        );
+    }
+
+
 }
