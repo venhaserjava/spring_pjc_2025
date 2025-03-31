@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+//import jakarta.persistence.GeneratedValue;
+//import jakarta.persistence.GenerationType;
+//import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -24,17 +27,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ServidorEfetivo {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pes_id",nullable = false)
+    @Column(name = "se_id", nullable = false)
     private Long id;
 
-    @Column(name = "se_matricula",nullable = false, length = 20)
+    @Column(name = "se_matricula", nullable = false, length = 20)
     private String matricula;
 
     @OneToOne
-    @JoinColumn(name = "pes_id", referencedColumnName = "pes_id", insertable = false, updatable = false)
-    private Pessoa pessoa;
-
-}
+    @JoinColumn(name = "pes_id", referencedColumnName = "pes_id", nullable = false)
+    private Pessoa pessoa;}

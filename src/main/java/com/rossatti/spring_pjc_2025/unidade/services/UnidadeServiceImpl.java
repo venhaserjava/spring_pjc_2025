@@ -53,7 +53,7 @@ public class UnidadeServiceImpl implements UnidadeService {
         if (request==null) {
             return null;            
         }
-        if ( repository.existsByNomeAndSigla(request.getNome(), request.getSigla() ) ) 
+        if ( ! repository.existsByNomeAndSigla(request.getNome(), request.getSigla() ) ) 
         {
             
         
