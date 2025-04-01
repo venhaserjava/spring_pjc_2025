@@ -15,4 +15,6 @@ public interface ServidorTemporarioRepository  extends JpaRepository<ServidorTem
     boolean existsByPessoaIdAndDataDemissaoIsNull(Long pessoaId);
     Optional<ServidorTemporario> findByPessoaIdAndDataDemissaoIsNull(Long pessoaId);
     Page<ServidorTemporario> findAllByDataDemissaoIsNull(Pageable pageable);
+    Page<ServidorTemporario> findAllByPessoaNomeContainingIgnoreCaseAndDataDemissaoIsNull(String nome, Pageable pageable);
+
 }

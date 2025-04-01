@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import static org.springframework.http.HttpStatus.*;
 
+import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.repositories.ServidorEfetivoRepository;
@@ -54,9 +55,20 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
     }
 
     public Page<ServidorTemporarioDTO> findAllServidoresTemporarios(String nome, Pageable pageable) {
-            Page<ServidorTemporario> servidores = servidorTemporarioRepository.findAllByDataDemissaoIsNull(pageable);
-            return servidores.map(this::mapToDTO);
+        Page<ServidorTemporario> servidores;
+        if (nome != null && !nome.isBlank()) {
+            servidores = servidorTemporarioRepository.findAllByPessoaNomeContainingIgnoreCaseAndDataDemissaoIsNull(nome, pageable);
+        } else {
+            servidores = servidorTemporarioRepository.findAllByDataDemissaoIsNull(pageable);
+        }
+        return servidores.map(this::mapToDTO);
     }
+    
+
+    // public Page<ServidorTemporarioDTO> findAllServidoresTemporarios(String nome, Pageable pageable) {
+    //         Page<ServidorTemporario> servidores = servidorTemporarioRepository.findAllByDataDemissaoIsNull(pageable);
+    //         return servidores.map(this::mapToDTO);
+    // }
 
 
     @Transactional
@@ -178,7 +190,35 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
         }
         return true;
     }
+    
+    public ServidorTemporarioDTO mapToDTO(ServidorTemporario servidorTemporario) {
+        Pessoa pessoa = servidorTemporario.getPessoa();
+        
+        // Verifica se a pessoa tem endereços antes de acessar
+        Endereco endereco = (pessoa.getEnderecos() != null && !pessoa.getEnderecos().isEmpty()) 
+            ? pessoa.getEnderecos().iterator().next() 
+            : null;
 
+        return new ServidorTemporarioDTO(
+            pessoa.getId(),
+            pessoa.getNome(),
+            pessoa.getMae(),
+            pessoa.getPai(),
+            pessoa.getSexo(),
+            pessoa.getDataNascimento(),                        
+            (endereco != null) ? endereco.getTipoLogradouro() : null,
+            (endereco != null) ? endereco.getLogradouro() : null,
+            (endereco != null) ? endereco.getNumero() : null,
+            (endereco != null) ? endereco.getBairro() : null,
+            (endereco != null && endereco.getCidade() != null) ? endereco.getCidade().getNome() : null,
+            "Servidor_Temporário",
+            servidorTemporario.getDataAdmissao(),
+            servidorTemporario.getDataDemissao()
+        );
+    }
+
+
+/*
     public ServidorTemporarioDTO mapToDTO(ServidorTemporario servidorTemporario) {
         Pessoa pessoa = servidorTemporario.getPessoa();
         return new ServidorTemporarioDTO(
@@ -187,7 +227,7 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
             pessoa.getMae(),
             pessoa.getPai(),
             pessoa.getSexo(),
-            pessoa.getDataNascimento(),
+            pessoa.getDataNascimento(),                        
             pessoa.getEnderecos().iterator().next().getTipoLogradouro(),
             pessoa.getEnderecos().iterator().next().getLogradouro(),
             pessoa.getEnderecos().iterator().next().getNumero(),
@@ -198,6 +238,6 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
             servidorTemporario.getDataDemissao()
         );
     }
-
+*/
 
 }

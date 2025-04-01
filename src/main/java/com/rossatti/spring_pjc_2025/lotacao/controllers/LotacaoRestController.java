@@ -9,8 +9,6 @@ import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.response.Endere
 
 import jakarta.validation.Valid;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -69,7 +67,8 @@ public class LotacaoRestController {
     //     return ResponseEntity.noContent().build();
     // }
 
-    @GetMapping("/endereco-funcional")
+//    @GetMapping("/endereco-funcional")
+    @GetMapping(ApiRoutes.FUNCTIONAL_ADDRESS)
     public ResponseEntity<Page<EnderecoFuncionalResponseDTO>> buscarEnderecoFuncional(
         @RequestParam String nome,
         @PageableDefault(size = 10, sort = "pessoa.nome", direction = Direction.ASC) Pageable pageable

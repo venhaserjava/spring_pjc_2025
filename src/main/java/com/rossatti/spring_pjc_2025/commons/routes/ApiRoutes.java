@@ -30,6 +30,7 @@ public class ApiRoutes {
     public static final String FIND_POSTING_BY_ID = FIND_POSTING+"/{id}";
     public static final String CREATE_POSTING = API+POSTING;
     public static final String UPDATE_POSTING = API+POSTING+"/{id}";
+    public static final String FUNCTIONAL_ADDRESS = FIND_POSTING+"/endereco-funcional";
 
     public static final String ADDRESSES = "/enderecos";
     public static final String FIND_ADDRESSES = API+ADDRESSES;
