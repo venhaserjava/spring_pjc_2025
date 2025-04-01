@@ -1,5 +1,6 @@
 package com.rossatti.spring_pjc_2025.unidade.dtos.request;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
@@ -35,5 +36,6 @@ public class UnidadeRequest {
     @UniqueValue(entityClass = Unidade.class, fieldName = "sigla", message = "Esta Sigla já está em uso.")       
     private String sigla;
 
-    private Set<ServidorEnderecoRequest> enderecos;    
+    @Builder.Default
+    private Set<ServidorEnderecoRequest> enderecos = new HashSet<>(); 
 }
