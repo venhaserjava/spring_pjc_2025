@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
+import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.cidade.mappers.CidadeMapper;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
@@ -66,9 +67,12 @@ public class CidadeServiceImpl implements CidadeService {
         
         BeanUtils.copyProperties(request,cidadeToUpdate,"id");
         var cidadeUpdated = repository.save(cidadeToUpdate);
-        return mapper.toResponse(cidadeUpdated);        
-        
+        return mapper.toResponse(cidadeUpdated);                
     }
-
+    @Override
+    public Cidade criarCidadeSeNaoExistir(String nome, String uf) {
+        return repository.findByNomeAndUf(nome, uf)
+            .orElseGet(() -> repository.save(new Cidade(null, nome, uf, null)));
+    }
 
 }

@@ -48,7 +48,6 @@ public class EnderecoServiceImpl implements EnderecoService {
         return mapper.toResponse(endereco);
     }    
 
-
     @Override
     @Transactional
     public EnderecoResponse create(EnderecoRequest dto) {

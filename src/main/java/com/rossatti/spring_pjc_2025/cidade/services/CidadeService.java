@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
+import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 
 public interface CidadeService {
 
@@ -17,5 +18,7 @@ public interface CidadeService {
     public CidadeResponse create(CidadeRequest request);
 
     public CidadeResponse update(Long id, CidadeRequest request);
+
+    public Cidade criarCidadeSeNaoExistir(String nome, String uf);
 
 }
