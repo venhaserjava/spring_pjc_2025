@@ -2,6 +2,8 @@ package com.rossatti.spring_pjc_2025.Unidade.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -22,9 +24,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
+import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
 import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;
+import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.endereco.repositories.EnderecoRepository;
+import com.rossatti.spring_pjc_2025.servidor.dtos.request.ServidorCidadeRequest;
 import com.rossatti.spring_pjc_2025.servidor.dtos.request.ServidorEnderecoRequest;
 import com.rossatti.spring_pjc_2025.unidade.dtos.request.UnidadeRequest;
 import com.rossatti.spring_pjc_2025.unidade.dtos.response.UnidadeResponse;
@@ -69,13 +74,8 @@ class UnidadeServiceTest {
             .numero(123)
             .bairro("Centro")
             .cidadeId(7L)
-            // .cidade(CidadeRequest.builder()
-            //         .nome("Cidade Teste")
-            //         .uf("SP")
-            //         .build())
             .build();
-        Set<ServidorEnderecoRequest> enderecos = new HashSet<>();
-//        enderecos.add(enderecoRequest);            
+        Set<ServidorEnderecoRequest> enderecos = new HashSet<>();          
         
         unidade = Unidade.builder()
                 .id(1L)
@@ -86,6 +86,7 @@ class UnidadeServiceTest {
         unidadeRequest = UnidadeRequest.builder()
                 .nome("Unidade Teste")
                 .sigla("UT")
+                .enderecos(null)
                 .enderecos(enderecos)
                 .build();                
         
@@ -132,10 +133,42 @@ class UnidadeServiceTest {
         assertNotNull(result);
         assertNull(result.getId());
     }
-/*    
+
     @Test
     void testCreate() {
+
+        // Criando um CidadeRequest válido
+        ServidorCidadeRequest servidorCidadeRequest = ServidorCidadeRequest.builder()
+             .nome("Cidade Teste")
+             .uf("SP")
+             .build();
+
+        // Criando um ServidorEnderecoRequest válido
+        ServidorEnderecoRequest servidorEnderecoRequest = ServidorEnderecoRequest.builder()
+            .tipoLogradouro("Rua")
+            .logradouro("Teste")
+            .numero(123)
+            .bairro("Centro")
+            .cidade(servidorCidadeRequest)
+            .build();        
+
+            Set<ServidorEnderecoRequest> enderecos = new HashSet<>();
+            enderecos.add(servidorEnderecoRequest);
+
+        // Criando uma UnidadeRequest válida
+        UnidadeRequest unidadeRequest = UnidadeRequest.builder()
+        .nome("Unidade Teste")
+        .sigla("UT")
+        .enderecos(enderecos)
+        .build();
+
+        
+        // Mock do repositório para garantir que a unidade não existe ainda
         when(unidadeRepository.existsByNomeAndSigla(anyString(), anyString())).thenReturn(false);
+        when(cidadeRepository.findByNomeAndUf(anyString(), anyString())).thenReturn(Optional.of(new Cidade(1L, "Cidade Teste", "SP", null)));
+        when(enderecoRepository.findByTipoLogradouroAndLogradouroAndNumeroAndBairroAndCidadeId(
+            anyString(), anyString(), anyInt(), anyString(), anyLong()
+        )).thenReturn(Optional.of(new Endereco(1L, "Rua", "Teste", 123, "Centro", new Cidade(1L, "Cidade Teste", "SP", null), new HashSet<>())));
         when(unidadeRepository.save(any(Unidade.class))).thenReturn(unidade);
         when(unidadeMapper.toResponse(any(Unidade.class))).thenReturn(unidadeResponse);
         
@@ -144,7 +177,7 @@ class UnidadeServiceTest {
         assertNotNull(result);
         assertEquals("Unidade Teste", result.getNome());
     }
-*/
+
     @Test
     void testUpdate() {
         when(unidadeRepository.findById(1L)).thenReturn(Optional.of(unidade));
