@@ -28,7 +28,6 @@ public class ServidorServiceImpl implements ServidorService {
 
 
     private final PessoaRepository pessoaRepository;
-//    private final PessoaFotoService pessoaFotoService;
     private final CidadeRepository cidadeRepository;
     private final EnderecoRepository enderecoRepository;
     private final ServidorMapper servidorMapper;
@@ -53,10 +52,8 @@ public class ServidorServiceImpl implements ServidorService {
     public ServidorResponse update(Long id, ServidorRequest request) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }    
+    }           
     
-    
-    //@SuppressWarnings("unchecked")
     @Override
     @Transactional
     public ServidorResponse create(ServidorRequest request) {
@@ -80,7 +77,6 @@ public class ServidorServiceImpl implements ServidorService {
         else {
             BeanUtils.copyProperties(cidade.get(), cidadeData);
         }
-
         //--------------------------------------------
         // Tratando dados de Endereco
         //--------------------------------------------
@@ -93,16 +89,6 @@ public class ServidorServiceImpl implements ServidorService {
             cidadeData.getId()
         );
         if (endereco.isEmpty()) {
-            // enderecoData = enderecoRepository.save(
-            //     new Endereco(null,  request.getEnderecos().iterator().next().getTipoLogradouro(),
-            //                         request.getEnderecos().iterator().next().getLogradouro(), 
-            //                         request.getEnderecos().iterator().next().getNumero(),
-            //                         request.getEnderecos().iterator().next().getBairro(), 
-            //                         cidadeData, 
-            //                         new HashSet<>(), 
-            //                         new HashSet<>()
-            //          )
-            // );                
             enderecoData = enderecoRepository.save(
             Endereco.builder()
                 .tipoLogradouro(request.getEnderecos().iterator().next().getTipoLogradouro())
@@ -110,9 +96,7 @@ public class ServidorServiceImpl implements ServidorService {
                 .numero(request.getEnderecos().iterator().next().getNumero())
                 .bairro(request.getEnderecos().iterator().next().getBairro())
                 .cidade(cidadeData)
-//                .unidades(new HashSet<>())
                 .unidadeEnderecos(new HashSet<>())
-//                .pessoas(new HashSet<>())
                 .build()
             );
 
@@ -128,7 +112,6 @@ public class ServidorServiceImpl implements ServidorService {
                 request.getNome(), request.getMae(), request.getDataNascimento()
         );
         if (pessoa.isEmpty()) {
-//            pessoaData = pessoaRepository
             Pessoa pessoaToCreate = new Pessoa(null,   request.getNome(), 
                                                 request.getMae(), 
                                                 request.getPai(), 
@@ -141,19 +124,14 @@ public class ServidorServiceImpl implements ServidorService {
                 pessoaData.setEnderecos(new HashSet<>());
             }
             pessoaData.getEnderecos().add(enderecoData);
-
-//            pessoaData.getEnderecos().add(enderecoData);
             pessoaRepository.save(pessoaData);    
         } else {
             BeanUtils.copyProperties(pessoa.get(), pessoaData);
-        }       
-        
-
+        }              
         return servidorMapper.toResponse(pessoaData);
     }
 
     public boolean existsServidor(String nome,String mae, LocalDate dataNascimento ){
         return pessoaRepository.existsByNomeAndMaeAndDataNascimento( nome, mae, dataNascimento );        
     }
-
 }

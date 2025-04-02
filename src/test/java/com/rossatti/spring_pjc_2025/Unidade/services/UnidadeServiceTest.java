@@ -23,10 +23,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
-import com.rossatti.spring_pjc_2025.endereco.dtos.request.EnderecoRequest;
 import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.endereco.repositories.EnderecoRepository;
 import com.rossatti.spring_pjc_2025.servidor.dtos.request.ServidorCidadeRequest;
@@ -63,18 +61,18 @@ class UnidadeServiceTest {
     private Unidade unidade;
     private UnidadeRequest unidadeRequest;
     private UnidadeResponse unidadeResponse;
-    private CidadeRequest cidadeRequest;
+//    private CidadeRequest cidadeRequest;
 
     @BeforeEach
     void setUp() {
 
-        EnderecoRequest enderecoRequest = EnderecoRequest.builder()
-            .tipoLogradouro("Rua")
-            .logradouro("Teste")
-            .numero(123)
-            .bairro("Centro")
-            .cidadeId(7L)
-            .build();
+        // EnderecoRequest enderecoRequest = EnderecoRequest.builder()
+        //     .tipoLogradouro("Rua")
+        //     .logradouro("Teste")
+        //     .numero(123)
+        //     .bairro("Centro")
+        //     .cidadeId(7L)
+        //     .build();
         Set<ServidorEnderecoRequest> enderecos = new HashSet<>();          
         
         unidade = Unidade.builder()

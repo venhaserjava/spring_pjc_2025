@@ -22,14 +22,6 @@ public class PessoaServiceImpl implements PessoaService {
     private final PessoaRepository repository;
     private final PessoaMapper mapper;
 
-    // @Override
-    // public List<PessoaResponse> findAll(){
-    //     return repository.findAll()
-    //         .stream()
-    //         .map(mapper::toResponse)
-    //         .toList();
-    // }
-
     @Override
     public Page<PessoaResponse> findPeople(String nome,Pageable pageable){
         return repository.findByNomeContaining(nome, pageable)
