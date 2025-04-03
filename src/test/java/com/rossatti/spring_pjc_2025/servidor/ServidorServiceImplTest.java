@@ -3,7 +3,6 @@ package com.rossatti.spring_pjc_2025.servidor;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
@@ -65,20 +64,6 @@ class ServidorServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        // cidade = new Cidade(1L, "São Paulo", "SP", Endereco.builder()
-        //                 .id(1L)
-        //                 .tipoLogradouro("Rua")
-        //                 .logradouro("Avenida Paulista")
-        //                 .numero(1000)
-        //                 .bairro("Centro")
-        //                 .
-        //                 .build());
-        // unidade =  Unidade.builder()
-        //                 .id(1L)
-        //                 .nome("Almoxarifado")
-        //                 .sigla("OF")
-        //                 .build();
-
         cidade = Cidade.builder()
                     .id(1L)
                     .nome("São Paulo")
@@ -96,6 +81,7 @@ class ServidorServiceImplTest {
                 .cidade(cidade)
                 .unidadeEnderecos(unidades)
                 .build();
+                
         pessoa = Pessoa.builder()
                     .id(1L)
                     .nome("João da Silva")
