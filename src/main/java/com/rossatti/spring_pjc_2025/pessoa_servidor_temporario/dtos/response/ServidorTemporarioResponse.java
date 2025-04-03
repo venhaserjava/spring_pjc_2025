@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServidorTemporarioResponse {
-    
+public class ServidorTemporarioResponse {    
     private Long pessoaId;
     private String pessoaNome;
     private String pessoaMae;
@@ -22,7 +21,4 @@ public class ServidorTemporarioResponse {
     private String TipoServidor;
     private LocalDate dataAdmissao;
     private LocalDate dataDemissao;
-
-
-
 }

@@ -22,8 +22,5 @@ public class ServidorTemporarioMapperImpl implements ServidorTemporarioMapper {
             .dataAdmissao(servidor.getDataAdmissao())
             .dataDemissao(servidor.getDataDemissao())
             .build();
-    }
-
-    
-
+    }   
 }

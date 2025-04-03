@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ServidorTemporario {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "st_id",nullable = false)
@@ -42,5 +41,4 @@ public class ServidorTemporario {
     @OneToOne
     @JoinColumn(name = "pes_id", referencedColumnName = "pes_id", insertable = false, updatable = false)
     private Pessoa pessoa;
-
 }

@@ -62,14 +62,7 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
             servidores = servidorTemporarioRepository.findAllByDataDemissaoIsNull(pageable);
         }
         return servidores.map(this::mapToDTO);
-    }
-    
-
-    // public Page<ServidorTemporarioDTO> findAllServidoresTemporarios(String nome, Pageable pageable) {
-    //         Page<ServidorTemporario> servidores = servidorTemporarioRepository.findAllByDataDemissaoIsNull(pageable);
-    //         return servidores.map(this::mapToDTO);
-    // }
-
+    } 
 
     @Transactional
     public void create(ServidorTemporarioRequest dto) {
@@ -216,28 +209,4 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
             servidorTemporario.getDataDemissao()
         );
     }
-
-
-/*
-    public ServidorTemporarioDTO mapToDTO(ServidorTemporario servidorTemporario) {
-        Pessoa pessoa = servidorTemporario.getPessoa();
-        return new ServidorTemporarioDTO(
-            pessoa.getId(),
-            pessoa.getNome(),
-            pessoa.getMae(),
-            pessoa.getPai(),
-            pessoa.getSexo(),
-            pessoa.getDataNascimento(),                        
-            pessoa.getEnderecos().iterator().next().getTipoLogradouro(),
-            pessoa.getEnderecos().iterator().next().getLogradouro(),
-            pessoa.getEnderecos().iterator().next().getNumero(),
-            pessoa.getEnderecos().iterator().next().getBairro(),
-            pessoa.getEnderecos().iterator().next().getCidade().getNome(),
-            "Servidor_Temporário",
-            servidorTemporario.getDataAdmissao(),
-            servidorTemporario.getDataDemissao()
-        );
-    }
-*/
-
 }

@@ -2,7 +2,6 @@ package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response;
 
 import java.time.LocalDate;
 
-//import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @NoArgsConstructor
-//@AllArgsConstructor
 public class ServidorTemporarioDTO {
 
     private Long id;
@@ -46,6 +44,4 @@ public class ServidorTemporarioDTO {
         this.dataAdmissao = dataAdmissao;
         this.dataDemissao = dataDemissao;
     }
-
-    // Getters and setters (ou você pode usar @Data do Lombok)
 }

@@ -37,4 +37,6 @@ public class ServidorEfetivo {
 
     @OneToOne
     @JoinColumn(name = "pes_id", referencedColumnName = "pes_id", nullable = false)
-    private Pessoa pessoa;}
+    private Pessoa pessoa;
+}
+

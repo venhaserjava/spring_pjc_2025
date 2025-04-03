@@ -34,5 +34,4 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
             Integer numero,
             String bairro,
             Long  cidadeId);    
-
 }

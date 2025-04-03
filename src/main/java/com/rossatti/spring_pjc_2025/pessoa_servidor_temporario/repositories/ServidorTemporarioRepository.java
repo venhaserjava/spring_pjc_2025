@@ -11,10 +11,8 @@ import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.entities.Servidor
 
 @Repository
 public interface ServidorTemporarioRepository  extends JpaRepository<ServidorTemporario,Long> {
-//    Page<ServidorTemporario> findAll(String nome, Pageable pageable);
     boolean existsByPessoaIdAndDataDemissaoIsNull(Long pessoaId);
     Optional<ServidorTemporario> findByPessoaIdAndDataDemissaoIsNull(Long pessoaId);
     Page<ServidorTemporario> findAllByDataDemissaoIsNull(Pageable pageable);
     Page<ServidorTemporario> findAllByPessoaNomeContainingIgnoreCaseAndDataDemissaoIsNull(String nome, Pageable pageable);
-
 }
