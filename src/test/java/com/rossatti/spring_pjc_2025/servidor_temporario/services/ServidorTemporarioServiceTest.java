@@ -1,25 +1,22 @@
 package com.rossatti.spring_pjc_2025.servidor_temporario.services;
 
-import org.mockito.Mock;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
+import java.util.List;
+import org.mockito.Mock;
+import java.util.HashSet;
+import java.util.Optional;
 import java.time.LocalDate;
 import org.mockito.InjectMocks;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.server.ResponseStatusException;

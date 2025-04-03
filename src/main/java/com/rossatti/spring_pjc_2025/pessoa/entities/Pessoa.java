@@ -1,7 +1,7 @@
 package com.rossatti.spring_pjc_2025.pessoa.entities;
 
 import java.time.LocalDate;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
