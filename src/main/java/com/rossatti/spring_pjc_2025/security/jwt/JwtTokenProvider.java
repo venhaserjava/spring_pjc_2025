@@ -1,6 +1,6 @@
 package com.rossatti.spring_pjc_2025.security.jwt;
 
-
+/*
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
@@ -42,8 +42,11 @@ public class JwtTokenProvider {
                 .build()
                 .parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (JwtException | IllegalArgumentException e) {                        
+            e.printStackTrace();            
+            System.out.println("isTokenValid ->"+e);
             return false;
         }
     }
 }
+*/

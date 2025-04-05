@@ -18,11 +18,17 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtUtil jwtUtil;
+//    private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
 
-    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
-        this.jwtTokenProvider = jwtTokenProvider;
+    public JwtAuthenticationFilter(
+//        JwtTokenProvider jwtTokenProvider, 
+        JwtUtil jwtUtil,
+        UserDetailsService userDetailsService
+    ) {
+//        this.jwtTokenProvider = jwtTokenProvider;
+        this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
 
@@ -30,10 +36,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
-        String token = getTokenFromRequest(request);
 
-        if (token != null && jwtTokenProvider.isTokenValid(token)) {
-            String username = jwtTokenProvider.getUsernameFromToken(token);
+        System.out.println("Entrou no JwtAuthenticationFilter - verificando request"+request);
+        String token = getTokenFromRequest(request);
+        System.out.println("Token recebido no Header: " + token);
+
+        // if (token != null && jwtTokenProvider.isTokenValid(token)) {
+        //     String username = jwtTokenProvider.getUsernameFromToken(token);
+        if (token != null && jwtUtil.validateToken(token)) {
+            String username = jwtUtil.extractUsername(token);
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
@@ -49,6 +60,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private String getTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            System.out.println("Entrou no getTokenFromRequest==> "+bearerToken.substring(7));
             return bearerToken.substring(7);
         }
         return null;

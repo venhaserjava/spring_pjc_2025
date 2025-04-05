@@ -85,3 +85,12 @@ Pronto! Agora você tem o Docker rodando com PostgreSQL e MinIO. 🚀
 
 DROP DATABASE spring_pjc_2025_db;
 CREATE DATABASE spring_pjc_2025_db;
+
+
+Então, onde e como registrar esse usuário?
+Você tem 3 formas principais de registrar o usuário e sua senha:
+
+INSERT INTO usuario (username, password) VALUES (
+  'admin',
+  '$2a$10$w.xpQKqgqXPLv4l4oLZiUuj83J4tcyEMu7eDuh1vKugEMsC1blf7K'
+);
