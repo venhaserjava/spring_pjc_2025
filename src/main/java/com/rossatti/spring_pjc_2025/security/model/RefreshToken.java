@@ -1,11 +1,9 @@
-package com.rossatti.spring_pjc_2025.security.jwt;
+package com.rossatti.spring_pjc_2025.security.model;
 
 
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
-
-import com.rossatti.spring_pjc_2025.security.model.User;
 
 @Entity
 @Getter

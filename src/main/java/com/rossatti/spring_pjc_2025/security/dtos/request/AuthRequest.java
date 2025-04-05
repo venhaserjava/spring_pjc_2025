@@ -1,4 +1,4 @@
-package com.rossatti.spring_pjc_2025.security.model;
+package com.rossatti.spring_pjc_2025.security.dtos.request;
 
 
 import lombok.Data;

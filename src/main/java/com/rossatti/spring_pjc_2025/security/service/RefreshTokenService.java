@@ -1,32 +1,55 @@
 package com.rossatti.spring_pjc_2025.security.service;
 
-//package com.rossatti.spring_pjc_2025.security.service;
-
-import com.rossatti.spring_pjc_2025.security.jwt.RefreshToken;
+import com.rossatti.spring_pjc_2025.security.model.RefreshToken;
+import com.rossatti.spring_pjc_2025.security.model.User;
 import com.rossatti.spring_pjc_2025.security.repository.RefreshTokenRepository;
+import com.rossatti.spring_pjc_2025.security.repository.UserRepository;
+
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class RefreshTokenService {
 
+    private final UserRepository userRepository;
+
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public RefreshTokenService(RefreshTokenRepository refreshTokenRepository) {
+    public RefreshTokenService(
+        RefreshTokenRepository refreshTokenRepository,
+        UserRepository userRepository
+    ) {
         this.refreshTokenRepository = refreshTokenRepository;
+        this.userRepository = userRepository;
     }
 
     public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);
     }
+    public RefreshToken createRefreshToken(String username) {
 
+        User user = userRepository.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
+
+        RefreshToken refreshToken = new RefreshToken();
+        refreshToken.setToken(UUID.randomUUID().toString()); // gera token aleatório
+        refreshToken.setUser(user);
+        refreshToken.setExpiryDate(Instant.now().plusSeconds(604800)); // 7 dias
+
+        return refreshTokenRepository.save(refreshToken);
+    }
+
+/*
     public RefreshToken createRefreshToken(String username) {
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setToken("gerarUmTokenAleatorioAqui");
         refreshToken.setExpiryDate(Instant.now().plusSeconds(604800)); // 7 dias
         return refreshTokenRepository.save(refreshToken);
     }
+*/        
 }
 
 /*
