@@ -20,6 +20,5 @@ public class ServidorEfetivoResponseDTO {
     private String unidadeNome;
     private LocalDate dataLotacao;
     private String portaria;
-//    private String fotografia;
     
 }

@@ -11,7 +11,10 @@ import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.response.Servid
 
 public interface ServidorEfetivoService {
 
-    void cadastrarServidorEfetivo(ServidorEfetivoRequest dto);    
+    void cadastrarServidorEfetivo(ServidorEfetivoRequest dto); 
+
     ServidorEfetivoResponseDTO criarServidorEfetivo(ServidorEfetivoRequestDTO request);     
+
     Page<ServidorEfetivoResponseDTO> listarServidoresPorUnidade(Long unidadeId,Pageable pageable);
+    
 }

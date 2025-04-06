@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EnderecoFuncionalResponseDTO {
+
     private String nomeServidor;
     private String nomeUnidade;
     private String logradouro;
@@ -17,4 +18,5 @@ public class EnderecoFuncionalResponseDTO {
     private String bairro;
     private String cidade;
     private String uf;
+    
 }

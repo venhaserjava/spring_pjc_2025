@@ -5,11 +5,11 @@ import com.rossatti.spring_pjc_2025.exceptions.ModelNotFoundException;
 public class ServidorEfetivoNotFoundException extends ModelNotFoundException {
 
     public ServidorEfetivoNotFoundException(String message) {
-        super(message);
-        //TODO Auto-generated constructor stub
+        super(message);        
     }
+    
     public ServidorEfetivoNotFoundException() {
-        super("Servidor Efetivo não encontrado!");        //TODO Auto-generated constructor stub
+        super("Servidor Efetivo não encontrado!");
     }
 
 }

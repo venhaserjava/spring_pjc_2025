@@ -39,16 +39,3 @@ public class LotacaoRequest {
     @NotBlank(message = "O campo 'portaria' é obrigatório.")   
     private String portaria;
 }
-
-/*
-     @NotNull(message = "Unidade é obrigatória.")
-    private Long unidadeId;
-
-    @NotNull(message = "Data de lotação é obrigatória.")
-    private LocalDate dataLotacao;
-
-    @Size(min = 1, max = 100)
-    @NotNull(message = "Portaria é obrigatória e não pode ser nula")
-    @NotBlank(message = "Portaria é obrigatória e não pode estar vazia ou conter apenas espaços.")
-    private String portaria;    
-*/

@@ -2,12 +2,13 @@ package com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.request;
 
 import java.time.LocalDate;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 @Data
 @Builder
@@ -28,4 +29,5 @@ public class ServidorEfetivoRequestDTO {
     private LocalDate dataLotacao;
 
     private String portaria;
+    
 }

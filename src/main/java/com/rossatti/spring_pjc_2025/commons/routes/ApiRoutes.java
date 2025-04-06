@@ -44,4 +44,10 @@ public class ApiRoutes {
     public static final String SERVANT_TEMP_UPDATE = API+SERVANT_TEMP+"/{id}";
     public static final String SERVANT_TEMP_FIND_BY_ID = SERVANT_TEMP_FIND +"/{id}";
 
+    public static final String SERVANT_EFFECTIVE = "/servidores-efetivos";    
+    public static final String SERVANT_EFFECTIVE_FIND = API+SERVANT_EFFECTIVE;
+    public static final String SERVANT_EFFECTIVE_CREATE = API+SERVANT_EFFECTIVE;
+    public static final String SERVANT_EFFECTIVE_UPDATE = API+SERVANT_EFFECTIVE+"/{id}";
+    public static final String SERVANT_EFFECTIVE_FIND_UNITY_BY_ID = SERVANT_EFFECTIVE_FIND+UNITS+"/{unidadeId}";
+
 }

@@ -12,36 +12,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.services.ServidorEfetivoService;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.request.ServidorEfetivoRequestDTO;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.dtos.response.ServidorEfetivoResponseDTO;
-//import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.entities.ServidorEfetivo;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.services.ServidorEfetivoService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/servidores-efetivos")
 @RequiredArgsConstructor
 public class ServidorEfetivoRestController {
 
     private final ServidorEfetivoService servidorEfetivoService;
     
-    @PostMapping
+    @PostMapping(ApiRoutes.SERVANT_EFFECTIVE_CREATE)
     public ResponseEntity<ServidorEfetivoResponseDTO> criarServidorEfetivo(@RequestBody ServidorEfetivoRequestDTO request) {
-        var servidorE = servidorEfetivoService.criarServidorEfetivo(request);
+
+        var servidorE = servidorEfetivoService.criarServidorEfetivo(request);        
         return ResponseEntity.ok(servidorE);
-    }
-    
-    @GetMapping("/unidade/{unidadeId}")
+    }    
+
+    @GetMapping(ApiRoutes.SERVANT_EFFECTIVE_FIND_UNITY_BY_ID)
     public ResponseEntity<Page<ServidorEfetivoResponseDTO>> listarServantsByUnits(
-        @PathVariable Long unidadeId
-        ,@PageableDefault(size = 10, sort = "nome", direction = Direction.ASC) Pageable pageable
-//    ,@PageableDefault Pageable pageable
-        ) {
-//        ServidorEfetivoResponseDTO servidorEfetivoResponseDTO = servidorEfetivoService.listarServidoresPorUnidade(unidadeId,pageable);
+        @PathVariable Long unidadeId,
+        @PageableDefault(size = 10, sort = "nome", direction = Direction.ASC) Pageable pageable
+    ) {
         return ResponseEntity.ok(servidorEfetivoService.listarServidoresPorUnidade(unidadeId,pageable));
     }
 }
