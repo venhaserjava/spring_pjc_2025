@@ -1,21 +1,21 @@
 package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.rossatti.spring_pjc_2025.commons.routes.ApiRoutes;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioDTO;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioResponse;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.service.ServidorTemporarioService;
-//import jakarta.validation.Valid;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioDTO;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioResponse;
 
 @RestController
-//@RequestMapping("/api/servidores-temporarios")
+
 public class ServidorTemporarioController {
 
     @Autowired
@@ -55,12 +55,5 @@ public class ServidorTemporarioController {
     ){
         servidorTemporarioService.update(id, request);
         return ResponseEntity.ok().body("{\"mensagem\": \"Servidor temporário Alterado com sucesso.\"}");
-    }     
-    //  @PutMapping(ApiRoutes.UPDATE_PEOPLE)
-    // @ResponseStatus(code = HttpStatus.ACCEPTED)
-    // public PessoaResponse update(@PathVariable Long id, @RequestBody @Valid PessoaRequest request){
-    //     return service.update(id, request);
-    // }
-  
-    
+    }          
 }

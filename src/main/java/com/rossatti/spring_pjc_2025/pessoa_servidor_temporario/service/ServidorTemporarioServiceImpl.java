@@ -1,67 +1,75 @@
 package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import jakarta.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-import static org.springframework.http.HttpStatus.*;
 
-import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
+import org.springframework.stereotype.Service;
+import static org.springframework.http.HttpStatus.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.repositories.ServidorEfetivoRepository;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioDTO;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioResponse;
+
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.entities.ServidorTemporario;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.mappers.ServidorTemporarioMapper;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioDTO;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioResponse;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.repositories.ServidorTemporarioRepository;
 
 @Service
 public class ServidorTemporarioServiceImpl implements ServidorTemporarioService {
 
-    private final PessoaRepository pessoaRepository;
-    private final ServidorTemporarioRepository servidorTemporarioRepository;
-    private final ServidorEfetivoRepository servidorEfetivoRepository;
     private final ServidorTemporarioMapper mapper;
+    private final PessoaRepository pessoaRepository;
+    private final ServidorEfetivoRepository servidorEfetivoRepository;
+    private final ServidorTemporarioRepository servidorTemporarioRepository;
 
     public ServidorTemporarioServiceImpl(
+        ServidorTemporarioMapper mapper,
         PessoaRepository pessoaRepository,
-        ServidorTemporarioRepository servidorTemporarioRepository,
         ServidorEfetivoRepository servidorEfetivoRepository,
-        ServidorTemporarioMapper mapper
+        ServidorTemporarioRepository servidorTemporarioRepository
     ) {
-        this.pessoaRepository = pessoaRepository;
-        this.servidorTemporarioRepository = servidorTemporarioRepository;
-        this.servidorEfetivoRepository = servidorEfetivoRepository;
         this.mapper = mapper;
+        this.pessoaRepository = pessoaRepository;
+        this.servidorEfetivoRepository = servidorEfetivoRepository;
+        this.servidorTemporarioRepository = servidorTemporarioRepository;
     }
     
     public ServidorTemporarioResponse findByPessoaId(Long pessoaId){
         
         Optional<Pessoa> pessoaOpt = pessoaRepository.findById(pessoaId);
+
         Optional<ServidorTemporario> servTempOpt = servidorTemporarioRepository.findByPessoaIdAndDataDemissaoIsNull(pessoaId);
+
         if (pessoaOpt.isEmpty() || servTempOpt.isEmpty()) {
             return new ServidorTemporarioResponse();            
         }
+
         return mapper.toResponse(pessoaOpt.get(),servTempOpt.get());
     }
 
-    public Page<ServidorTemporarioDTO> findAllServidoresTemporarios(String nome, Pageable pageable) {
+    public Page<ServidorTemporarioDTO> findAllServidoresTemporarios(
+        String nome, 
+        Pageable pageable
+    ){
         Page<ServidorTemporario> servidores;
+        
         if (nome != null && !nome.isBlank()) {
             servidores = servidorTemporarioRepository.findAllByPessoaNomeContainingIgnoreCaseAndDataDemissaoIsNull(nome, pageable);
         } else {
             servidores = servidorTemporarioRepository.findAllByDataDemissaoIsNull(pageable);
         }
-        return servidores.map(this::mapToDTO);
+        return servidores.map(mapper::mapToDTO);
     } 
 
     @Transactional
@@ -94,13 +102,14 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
         }
         // 🔹 Se houver erros, lançar exceção com JSON no formato esperado
         if (!erros.isEmpty()) {
-            throw new ResponseStatusException(BAD_REQUEST, criarMensagemErro(erros));
+            throw new ResponseStatusException(BAD_REQUEST, createErrorMessage(erros));
         } else {
             // 🔹 Criar e salvar Servidor Temporário
             ServidorTemporario servidorTemporario = new ServidorTemporario();
             servidorTemporario.setPessoa(pessoaOpt.get());
             servidorTemporario.setPessoaId(dto.getPessoaId());        
             servidorTemporario.setDataAdmissao(dto.getDataAdmissao());
+
             servidorTemporarioRepository.save(servidorTemporario);
         }
     }
@@ -139,19 +148,20 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
         }
         //  Se houver erros, lançar exceção com JSON no formato esperado
         if (!erros.isEmpty()) {
-            throw new ResponseStatusException(BAD_REQUEST, criarMensagemErro(erros));           
+            throw new ResponseStatusException(BAD_REQUEST, createErrorMessage(erros));           
         } else {
             // Gravando a atualização do Servidor Temporario
             ServidorTemporario servidorTemporario = new ServidorTemporario();
-            servidorTemporario.setPessoaId(pessoaId);        
             servidorTemporario.setId(servTempOpt.get().getId());
+            servidorTemporario.setPessoaId(pessoaId);        
             servidorTemporario.setDataAdmissao(dto.getDataAdmissao());
             servidorTemporario.setDataDemissao(dto.getDataDemissao());
+
             servidorTemporarioRepository.save(servidorTemporario);
         }
     }
 
-    private String criarMensagemErro(List<String> erros) {
+    private String createErrorMessage(List<String> erros) {
         if (erros.size() == 1) {
             return "{\"erro\": \"" + erros.get(0) + "\"}";
         } else {
@@ -182,31 +192,5 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
             return false;            
         }
         return true;
-    }
-    
-    public ServidorTemporarioDTO mapToDTO(ServidorTemporario servidorTemporario) {
-        Pessoa pessoa = servidorTemporario.getPessoa();
-        
-        // Verifica se a pessoa tem endereços antes de acessar
-        Endereco endereco = (pessoa.getEnderecos() != null && !pessoa.getEnderecos().isEmpty()) 
-            ? pessoa.getEnderecos().iterator().next() 
-            : null;
-
-        return new ServidorTemporarioDTO(
-            pessoa.getId(),
-            pessoa.getNome(),
-            pessoa.getMae(),
-            pessoa.getPai(),
-            pessoa.getSexo(),
-            pessoa.getDataNascimento(),                        
-            (endereco != null) ? endereco.getTipoLogradouro() : null,
-            (endereco != null) ? endereco.getLogradouro() : null,
-            (endereco != null) ? endereco.getNumero() : null,
-            (endereco != null) ? endereco.getBairro() : null,
-            (endereco != null && endereco.getCidade() != null) ? endereco.getCidade().getNome() : null,
-            "Servidor_Temporário",
-            servidorTemporario.getDataAdmissao(),
-            servidorTemporario.getDataDemissao()
-        );
     }
 }
