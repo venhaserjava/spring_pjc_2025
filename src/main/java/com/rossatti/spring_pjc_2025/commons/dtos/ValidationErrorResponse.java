@@ -1,15 +1,15 @@
 package com.rossatti.spring_pjc_2025.commons.dtos;
 
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Data
@@ -19,5 +19,7 @@ import lombok.experimental.SuperBuilder;
 @JsonNaming(SnakeCaseStrategy.class)
 @EqualsAndHashCode(callSuper = false)
 public class ValidationErrorResponse extends ErrorResponse {
+
     private Map<String,List<String>> erros;
+    
 }

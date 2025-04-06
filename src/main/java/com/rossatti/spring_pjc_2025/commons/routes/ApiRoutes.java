@@ -44,5 +44,4 @@ public class ApiRoutes {
     public static final String SERVANT_TEMP_UPDATE = API+SERVANT_TEMP+"/{id}";
     public static final String SERVANT_TEMP_FIND_BY_ID = SERVANT_TEMP_FIND +"/{id}";
 
-
 }

@@ -25,9 +25,7 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue,Str
         this.fieldName = constraintAnnotation.fieldName();
         this.entityClass = constraintAnnotation.entityClass();
     }
-
-
-    @SuppressWarnings("static-access")
+    
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
 
@@ -52,6 +50,5 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue,Str
         }
 
     }
-
 
 }

@@ -1,7 +1,7 @@
 package com.rossatti.spring_pjc_2025.commons.services;
 
-import java.util.Optional;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerMapping;
@@ -18,6 +18,7 @@ public class HttpServiceImpl implements HttpService {
 
     private final ObjectMapper objectMapper;
     private final HttpServletRequest request;
+
     @Override
     public <T> Optional<T> getPathVariable(String name, Class<T> type) {
         var attrs = request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
@@ -31,7 +32,5 @@ public class HttpServiceImpl implements HttpService {
             }
             return Optional.of(objectMapper.convertValue(value, type));            
     }
-
-
 
 }

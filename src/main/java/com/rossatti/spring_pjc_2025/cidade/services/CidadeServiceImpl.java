@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
+
 import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
-import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 import com.rossatti.spring_pjc_2025.cidade.mappers.CidadeMapper;
 import com.rossatti.spring_pjc_2025.cidade.repositories.CidadeRepository;
+import com.rossatti.spring_pjc_2025.cidade.exceptions.CidadeNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,21 +19,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CidadeServiceImpl implements CidadeService {
 
-    private final CidadeRepository repository;
     private final CidadeMapper mapper;
+    private final CidadeRepository repository;
 
     @Override
-    public Page<CidadeResponse> findAll(String nome, Pageable pageable) {
+    public Page<CidadeResponse> findAll(
+        String nome, 
+        Pageable pageable
+    ) {
         return repository.findByNomeContaining(nome, pageable)
-                        .map(mapper::toResponse);
-    }   
-    // @Override
-    // public List<CidadeResponse> findAll(Pageable pageable) {
-    //     return repository.findAll(pageable)
-    //         .stream()
-    //         .map(mapper::toResponse)
-    //         .toList();
-    // }
+                            .map(mapper::toResponse);
+    }       
 
     @Override
     public CidadeResponse findById(Long id) {
