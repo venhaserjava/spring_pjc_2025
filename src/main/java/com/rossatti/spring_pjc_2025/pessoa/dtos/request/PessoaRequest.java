@@ -2,23 +2,25 @@ package com.rossatti.spring_pjc_2025.pessoa.dtos.request;
 
 import java.time.LocalDate;
 
+import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotEmpty;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.rossatti.spring_pjc_2025.commons.validators.UniqueValue;
-import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
+import com.rossatti.spring_pjc_2025.commons.validators.UniqueValue;
 
 @Data
 @Builder
@@ -38,8 +40,6 @@ public class PessoaRequest {
     @Size(min = 2, max = 200)
     private String mae;
 
-//    @NotNull
-//    @NotEmpty
     @Size(min = 3, max = 200)
     private String pai;
 
@@ -51,6 +51,5 @@ public class PessoaRequest {
     @Past
     @DateTimeFormat(iso = ISO.DATE_TIME)
     private LocalDate dataNascimento;
-
 
 }
