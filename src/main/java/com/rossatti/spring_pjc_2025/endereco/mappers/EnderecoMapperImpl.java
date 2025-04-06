@@ -17,12 +17,14 @@ public class EnderecoMapperImpl implements EnderecoMapper {
 
     
     @Override
-    public Endereco toModel(EnderecoRequest dto, Cidade cidade) {
+    public Endereco toModel(
+        EnderecoRequest dto, 
+        Cidade cidade
+    ) {
+
         if (dto == null || cidade == null) {
             return null;
         }
-//        return new Endereco(null, dto.getTipoLogradouro(), dto.getLogradouro(), dto.getNumero(), dto.getBairro(), cidade,new HashSet<>(),new HashSet<>());
-//        return new Endereco(null, dto.getTipoLogradouro(), dto.getLogradouro(), dto.getNumero(), dto.getBairro(), cidade,null,null);
         
         return Endereco.builder()
             .tipoLogradouro(dto.getTipoLogradouro())
@@ -30,12 +32,13 @@ public class EnderecoMapperImpl implements EnderecoMapper {
             .numero(dto.getNumero())
             .bairro(dto.getBairro())
             .cidade(cidade)
-            .unidadeEnderecos(new HashSet<>()) // Evita null
+            .unidadeEnderecos(new HashSet<>()) 
             .build();
      }
 
     @Override
     public EnderecoResponse toResponse(Endereco endereco) {
+        
         if (endereco == null) {
             return null;
         }

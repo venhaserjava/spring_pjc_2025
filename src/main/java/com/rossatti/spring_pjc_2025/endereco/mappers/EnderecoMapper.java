@@ -6,6 +6,10 @@ import com.rossatti.spring_pjc_2025.endereco.dtos.response.EnderecoResponse;
 import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 
 public interface EnderecoMapper {
-    Endereco toModel(EnderecoRequest dto, Cidade cidade);
+    Endereco toModel(
+        EnderecoRequest dto, 
+        Cidade cidade
+    );
+    
     EnderecoResponse toResponse(Endereco endereco);
 }
