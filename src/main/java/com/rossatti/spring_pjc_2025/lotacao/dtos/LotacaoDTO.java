@@ -1,12 +1,14 @@
 package com.rossatti.spring_pjc_2025.lotacao.dtos;
-
+/*
 import java.time.LocalDate;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Data
 @Builder
@@ -20,7 +22,11 @@ public class LotacaoDTO {
     @NotNull(message = "Data de lotação é obrigatória.")
     private LocalDate dataLotacao;
 
-    @NotNull(message = "Portaria é obrigatória e não pode estar vazia ou conter apenas espaços.")
-    private String portaria;
-    
+    @Size(min = 1, max = 100)
+    @NotNull(message = "Portaria é obrigatória e não pode ser nula")
+    @NotBlank(message = "Portaria é obrigatória e não pode estar vazia ou conter apenas espaços.")
+    private String portaria;    
+
 }
+
+*/

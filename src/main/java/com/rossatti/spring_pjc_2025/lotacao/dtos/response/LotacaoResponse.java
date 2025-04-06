@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LotacaoResponse {
-    
+
     private Long id;
     private Long pessoaId;
     private String pessoaNome; // Nome da pessoa associada à lotação
@@ -21,4 +21,5 @@ public class LotacaoResponse {
     private LocalDate dataLotacao;
     private LocalDate dataRemocao;
     private String portaria;
+    
 }

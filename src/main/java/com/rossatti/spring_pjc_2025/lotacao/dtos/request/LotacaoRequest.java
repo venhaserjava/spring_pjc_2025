@@ -2,20 +2,22 @@ package com.rossatti.spring_pjc_2025.lotacao.dtos.request;
 
 import java.time.LocalDate;
 
+import lombok.Data;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+
 import com.rossatti.spring_pjc_2025.lotacao.validation.ValidLotacaoDate;
 import com.rossatti.spring_pjc_2025.lotacao.validation.ValidPessoaExists;
 import com.rossatti.spring_pjc_2025.lotacao.validation.ValidUnidadeExists;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@ValidLotacaoDate
 @Data
 @Builder
+@ValidLotacaoDate
 @NoArgsConstructor
 @AllArgsConstructor
 public class LotacaoRequest {
@@ -28,60 +30,25 @@ public class LotacaoRequest {
     @ValidUnidadeExists
     private Long unidadeId;
 
-    @NotNull
+    @NotNull(message = "Data de lotação é obrigatória.")
     private LocalDate dataLotacao;
 
     private LocalDate dataRemocao;
 
-    @NotBlank(message = "O campo 'portaria' é obrigatório.")   
     @Size(min = 1, max = 100)
+    @NotBlank(message = "O campo 'portaria' é obrigatório.")   
     private String portaria;
 }
 
 /*
-import java.time.LocalDate;
-//import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
-import com.rossatti.spring_pjc_2025.lotacao.validation.ValidLotacaoDate;
-import com.rossatti.spring_pjc_2025.lotacao.validation.ValidPessoaExists;
-import com.rossatti.spring_pjc_2025.lotacao.validation.ValidUnidadeExists;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@ValidLotacaoDate
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class LotacaoRequest {
-
-    @NotNull
-    @ValidPessoaExists    
-    private Long pessoaId;
-    
-    @NotNull
-    @ValidUnidadeExists
+     @NotNull(message = "Unidade é obrigatória.")
     private Long unidadeId;
 
-    @NotNull
-//    @DateTimeFormat(iso = ISO.DATE)
+    @NotNull(message = "Data de lotação é obrigatória.")
     private LocalDate dataLotacao;
 
-//    @DateTimeFormat(iso = ISO.DATE)
-    private LocalDate dataRemocao;
-
-    @NotNull    
-    @Size(min = 1,max = 100)
-    @NotBlank(message = "O campo 'portaria' é obrigatório.")   
-    private String portaria;
-}
+    @Size(min = 1, max = 100)
+    @NotNull(message = "Portaria é obrigatória e não pode ser nula")
+    @NotBlank(message = "Portaria é obrigatória e não pode estar vazia ou conter apenas espaços.")
+    private String portaria;    
 */

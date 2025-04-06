@@ -2,14 +2,15 @@ package com.rossatti.spring_pjc_2025.lotacao.mappers;
 
 import org.springframework.stereotype.Component;
 
-import com.rossatti.spring_pjc_2025.lotacao.dtos.response.LotacaoResponse;
 import com.rossatti.spring_pjc_2025.lotacao.entities.Lotacao;
+import com.rossatti.spring_pjc_2025.lotacao.dtos.response.LotacaoResponse;
 
 @Component
 public class LotacaoMapperImpl implements LotacaoMapper {
 
     @Override
     public LotacaoResponse toResponse(Lotacao lotacao) {
+
         return LotacaoResponse.builder()
                 .id(lotacao.getId())
                 .pessoaId(lotacao.getPessoa().getId())
@@ -20,6 +21,6 @@ public class LotacaoMapperImpl implements LotacaoMapper {
                 .dataRemocao(lotacao.getDataRemocao())
                 .portaria(lotacao.getPortaria())
                 .build();
+                
     }
-
 }

@@ -8,6 +8,6 @@ public class LotacaoNotFoundException extends ModelNotFoundException {
         super(message);
     }
     public LotacaoNotFoundException(){
-        super("A Lotação não foi encontrada.");
+        super("A Lotação não foi encontrada."); 
     }
 }
