@@ -1,21 +1,14 @@
 package com.rossatti.spring_pjc_2025.security.service;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-//import java.util.Collections;
-/*
- * 💡 Obs. Importante:
-* Esse código é um mock (usuário fixo: admin / senha 123456).
-* Quando quiser autenticar via banco, basta criar uma entidade Usuario, um UsuarioRepository, e buscar da JPA ao invés de fazer esse if.
- * 
- */
-import java.util.List;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -29,16 +22,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        // ⚠️ MOCK DE USUÁRIO – aqui você pode integrar com o banco depois
+        /* Os dados de usuarios fixos aqui são só para efeitos didaticos */        
         if (!username.equals("admin")) {
             throw new UsernameNotFoundException("Usuário não encontrado: " + username);
         }
 
         return new User(
                 "admin",
-                passwordEncoder.encode("123456"), // senha codificada (mesmo valor usado no login)
+                passwordEncoder.encode("123456"), 
                 List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))
             );
     }
 }
-//                Collections.emptyList() // roles/authorities se desejar
+

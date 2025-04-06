@@ -1,13 +1,11 @@
 package com.rossatti.spring_pjc_2025.security.model;
 
-
-import jakarta.persistence.*;
 import lombok.*;
 import java.time.Instant;
+import jakarta.persistence.*;
 
+@Data
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -26,4 +24,5 @@ public class RefreshToken {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+    
 }

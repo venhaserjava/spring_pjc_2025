@@ -33,5 +33,5 @@ public class JwtProperties {
 
     public void setRefreshExpiration(Long refreshExpiration) {
         this.refreshExpiration = refreshExpiration;
-    }
+    }    
 }

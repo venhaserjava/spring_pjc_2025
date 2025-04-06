@@ -1,20 +1,19 @@
 package com.rossatti.spring_pjc_2025.security.model;
-//package com.rossatti.spring_pjc_2025.security.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.HashSet;
 
 @Table(name = "users") // Evita conflito com palavras reservadas
-@Entity
 @Data
+@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,5 +31,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+    
 }
 
