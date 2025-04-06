@@ -9,12 +9,17 @@ import io.minio.MinioClient;
 @Configuration
 public class MinioClientConfig {
 
+    private final MinioProperties minioProperties;
+    
+    public MinioClientConfig(MinioProperties minioProperties) {
+        this.minioProperties = minioProperties;
+    }
+
     @Bean
     MinioClient minioClient() {
         return MinioClient.builder()
-            .endpoint("http://localhost:9000")
-            .credentials("ROOTUSER", "mudarSenha@123")
+        .endpoint(minioProperties.getUrl())
+        .credentials(minioProperties.getAccessKey(),minioProperties.getSecretKey())
             .build();
     }
-
 }
