@@ -8,7 +8,7 @@ public class CidadeNotFoundException extends ModelNotFoundException {
         super(message);        
     }
     public CidadeNotFoundException(){
-        super("Cidade não Encontrada");
+        super("Cidade não Encontrada!");
     }
 
 }

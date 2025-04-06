@@ -38,6 +38,7 @@ public class PessoaRestController {
     public PessoaResponse findPersonById(@PathVariable Long id){
         return service.findPersonById(id);
     }
+    
     @PostMapping(ApiRoutes.CREATE_PEOPLE)
     @ResponseStatus(code = HttpStatus.CREATED)
     public PessoaResponse create(@RequestBody @Valid PessoaRequest request){
@@ -49,5 +50,4 @@ public class PessoaRestController {
     public PessoaResponse update(@PathVariable Long id, @RequestBody @Valid PessoaRequest request){
         return service.update(id, request);
     }
-
 }

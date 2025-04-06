@@ -1,14 +1,13 @@
 package com.rossatti.spring_pjc_2025.cidade.dtos.request;
 
-import com.rossatti.spring_pjc_2025.cidade.validators.UniqueCidade;
-import com.rossatti.spring_pjc_2025.cidade.validators.ValidUF;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import com.rossatti.spring_pjc_2025.cidade.validators.ValidUF;
+import com.rossatti.spring_pjc_2025.cidade.validators.UniqueCidade;
 
 @Data
 @Builder

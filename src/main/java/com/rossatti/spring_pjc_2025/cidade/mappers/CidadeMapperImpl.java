@@ -1,10 +1,9 @@
 package com.rossatti.spring_pjc_2025.cidade.mappers;
 
 import org.springframework.stereotype.Component;
-
+import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 import com.rossatti.spring_pjc_2025.cidade.dtos.request.CidadeRequest;
 import com.rossatti.spring_pjc_2025.cidade.dtos.response.CidadeResponse;
-import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
 
 @Component
 public class CidadeMapperImpl implements CidadeMapper{
@@ -25,7 +24,5 @@ public class CidadeMapperImpl implements CidadeMapper{
             .uf(request.getUf())
             .build();
     }
-
-
 
 }
