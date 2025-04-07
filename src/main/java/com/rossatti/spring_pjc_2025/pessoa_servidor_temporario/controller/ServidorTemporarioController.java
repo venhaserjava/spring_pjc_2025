@@ -15,7 +15,6 @@ import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.Serv
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioResponse;
 
 @RestController
-
 public class ServidorTemporarioController {
 
     @Autowired

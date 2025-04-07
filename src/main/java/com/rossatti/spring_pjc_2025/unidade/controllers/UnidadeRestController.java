@@ -26,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping(ApiRoutes.UNITS)
 public class UnidadeRestController {
 
     private final UnidadeService service;

@@ -66,6 +66,4 @@ public class LotacaoRestController {
         return ResponseEntity.ok(enderecos);
 
     }
-
-
 }
