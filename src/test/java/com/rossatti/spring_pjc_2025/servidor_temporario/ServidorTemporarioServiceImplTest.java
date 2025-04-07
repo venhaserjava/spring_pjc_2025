@@ -1,37 +1,24 @@
 package com.rossatti.spring_pjc_2025.servidor_temporario;
 
-import org.mockito.Mock;
-
-import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
+import org.mockito.Mock;
+import java.util.HashSet;
 import java.time.LocalDate;
 import org.mockito.InjectMocks;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.server.ResponseStatusException;
-
+import org.junit.jupiter.api.extension.ExtendWith;
 import com.rossatti.spring_pjc_2025.cidade.entities.Cidade;
-import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
+import org.springframework.boot.test.context.SpringBootTest;
+import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.pessoa.repositories.PessoaRepository;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.repositories.ServidorEfetivoRepository;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.entities.ServidorTemporario;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.mappers.ServidorTemporarioMapper;
-import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.repositories.ServidorTemporarioRepository;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_efetivo.repositories.ServidorEfetivoRepository;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.service.ServidorTemporarioServiceImpl;
-
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.request.ServidorTemporarioRequest;
+import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.repositories.ServidorTemporarioRepository;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
