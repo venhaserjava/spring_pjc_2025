@@ -7,7 +7,7 @@
 ![MinIO](https://img.shields.io/badge/MinIO-EF2D5E?style=for-the-badge&logo=min.io&logoColor=white)
 ![Maven](https://img.shields.io/badge/maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-![Swagger](https://img.shields.io/badge/swagger-%2300C853.svg?style=for-the-badge&logo=swagger&logoColor=white)
+
 
 
 Este projeto é uma API construída usando
@@ -22,7 +22,7 @@ Este projeto é uma API construída usando
 - [Documentação da API](#api-endpoints)
 - [Uso](#usage)
 - [Authenticação](#authentication)
-- [Database](#database)
+- [Como Usar](#comousar)
 
 ---
 # Descrição do Projeto
@@ -153,7 +153,7 @@ Pronto! Agora você tem o Docker rodando com PostgreSQL e MinIO.
 
 A documentação completa dos endpoints REST da aplicação está disponível no arquivo [`api-docs.md`](./api-docs.md).
 
-# Uso
+# Como Usar
 
 ## Como executar o projeto com Docker
 
@@ -181,3 +181,82 @@ API	            http://localhost:8080
 PostgreSQL	    localhost:5432
 MinIO Console   http://localhost:9001
 ```
+
+# Fluxo de Entrada de dados
+```
+Fluxo de Entrada de dados do Projeto Spring:
+
+Inicio: 
+Faça a autenticação: 
+http://localhost:8080/auth/login
+{
+"username": "admin",
+"password": "123456"
+}
+
+Cadastre ao menos uma Unidade:
+localhost:8080/api/unidades
+{
+"nome":"Financeiro (FN)",
+"sigla":"FN",
+"enderecos": [ {
+"tipoLogradouro": "Rodovia",
+"logradouro": "BR 364",
+"numero": 1000,
+"bairro": "Jd. Industrial",
+"cidade": {
+"nome": "Cuiaba",
+"uf": "MT"
+}
+}
+]
+}
+
+
+Cadastre um Servidor (Pessoa,cidade,endereco):
+http://localhost:8080/api/servidores
+{
+"nome": "Fernando Soares de Campos",
+"mae": "Ana de Campos",
+"pai": "Jusemar Soares",
+"sexo": "Masculino",
+"dataNascimento": "1987-02-02",
+"enderecos": [
+{
+"tipoLogradouro": "Avenida",
+"logradouro": "Av. Afonso Pena",
+"numero": 115,
+"bairro": "Centro",
+"cidade": {
+"nome": "Campo Grande",
+"uf": "MS"
+}
+}
+]
+}
+
+Lembre-se de adicionar a foto.png
+.
+.
+Transforme ele em Servidor... 
+Temporario: 
+http://localhost:8080/api/servidores-temporarios
+{
+"pessoaId": 1,
+"dataAdmissao": "2022-07-11" 
+}
+
+
+ou eFetivo:
+http://localhost:8080/api/servidores-efetivos
+{
+"pessoaId": 1,
+"matricula": "36.001", 
+"unidadeId": 1,
+"dataLotacao": "2025-07-02",
+"portaria": "Portaria 15/2025" 
+}
+
+
+```
+
