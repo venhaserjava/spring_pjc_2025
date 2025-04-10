@@ -80,9 +80,5 @@ public class PessoaFotoServiceImpl implements PessoaFotoService {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hashBytes = digest.digest(file.getBytes());
         return Base64.getUrlEncoder().withoutPadding().encodeToString(hashBytes);
-    }
-
-
-    
-
+    }   
 }

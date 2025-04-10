@@ -17,6 +17,5 @@ public @interface UniqueEndereco {
 
     String message() default "Este Endereço Já existe!";
     Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};    
-    
+    Class<? extends Payload>[] payload() default {};       
 }

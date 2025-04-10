@@ -1,7 +1,6 @@
 package com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.mappers;
 
 import org.springframework.stereotype.Component;
-
 import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
 import com.rossatti.spring_pjc_2025.pessoa.entities.Pessoa;
 import com.rossatti.spring_pjc_2025.pessoa_servidor_temporario.dtos.response.ServidorTemporarioDTO;
@@ -51,7 +50,5 @@ public class ServidorTemporarioMapperImpl implements ServidorTemporarioMapper {
             servidorTemporario.getDataAdmissao(),
             servidorTemporario.getDataDemissao()
         );
-    }
-    
-
+    }   
 }

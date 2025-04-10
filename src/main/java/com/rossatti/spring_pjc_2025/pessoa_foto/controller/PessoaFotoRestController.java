@@ -84,13 +84,13 @@ public class PessoaFotoRestController {
                     .expiry(300)
                     .build()
             );
-//            logger.info("Link gerado com sucesso: " + url);
+
             return ResponseEntity.ok(url);
         } catch (Exception e) {
-//            logger.error("Erro ao gerar link temporário: ", e);
             return ResponseEntity.status(500).body("Erro ao gerar link temporário: " + e.getMessage());
         }
     }
+
 /*    
     @GetMapping("/link/{hash}")
     public ResponseEntity<String> obterLinkTemporario(@PathVariable String hash) {

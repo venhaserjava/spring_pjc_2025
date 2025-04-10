@@ -114,7 +114,6 @@ public class ServidorTemporarioServiceImpl implements ServidorTemporarioService 
         }
     }
 
-
     @Transactional
     public void update(Long pessoaId,ServidorTemporarioRequest dto){
 

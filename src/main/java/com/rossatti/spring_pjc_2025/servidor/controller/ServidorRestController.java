@@ -40,28 +40,6 @@ public class ServidorRestController {
 
     private final String bucketName = "fotos";
 
-//    @PostMapping(consumes = {"multipart/form-data"})
-   //  public ResponseEntity<String> cadastrarServidor(
-   //      @RequestPart("pessoa") String pessoaJson,  // JSON vem como String
-   //      @RequestPart("foto") MultipartFile foto) {
-
-   //      try {
-   //          // Converter JSON recebido para o DTO ServidorRequest
-   //          ServidorRequest servidor = objectMapper.readValue(pessoaJson, ServidorRequest.class);
-
-   //          // Debug: Exibir os dados convertidos
-   //          System.out.println("Nome: " + servidor.getNome());
-   //          System.out.println("Endereços: " + servidor.getEnderecos().size());
-   //          System.out.println("Foto recebida: " + foto.getOriginalFilename());
-
-   //          return ResponseEntity.ok("Servidor cadastrado com sucesso!");
-   //      } catch (Exception e) {
-   //          return ResponseEntity.status(500).body("Erro ao processar requisição: " + e.getMessage());
-   //      }
-   //  }
-
-   //@PostMapping(path = "/servidores",consumes = {"multipart/form-data"})
-//   @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
    @PostMapping(consumes = {"multipart/form-data"})
    public ResponseEntity<ServidorResponse> create(
             @RequestPart("pessoa") String pessoaJson,
@@ -106,11 +84,7 @@ public class ServidorRestController {
    // FOR CODE_REVIEW
    //---------------------------    
     public String obterLinkTemporario(@PathVariable String hash) {
-        try {
-            
-            //String objectName = hash + ".jpg";
-            // logger.info("Gerando link para objeto: " + objectName);
-            // logger.info("Bucket: " + bucketName);            
+        try {            
 
             String url = minioClient.getPresignedObjectUrl(
                 GetPresignedObjectUrlArgs.builder()

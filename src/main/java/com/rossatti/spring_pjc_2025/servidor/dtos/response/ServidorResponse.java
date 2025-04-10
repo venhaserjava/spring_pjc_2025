@@ -1,10 +1,6 @@
 package com.rossatti.spring_pjc_2025.servidor.dtos.response;
 
 import java.time.LocalDate;
-// import java.util.Set;
-// import com.rossatti.spring_pjc_2025.endereco.dtos.response.EnderecoResponse;
-// import com.rossatti.spring_pjc_2025.endereco.entities.Endereco;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

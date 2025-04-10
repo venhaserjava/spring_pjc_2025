@@ -19,7 +19,7 @@ Este projeto é uma API construída usando
 - [finalidade](#purpose)
 - [Tecnologias Utilizadas](#Technologies)
 - [instalação e Configuração](#installation)
-- [API Endpoints](#api-endpoints)
+- [Documentação da API](#api-endpoints)
 - [Uso](#usage)
 - [Authenticação](#authentication)
 - [Database](#database)
@@ -144,18 +144,18 @@ INSERT INTO usuario (username, password) VALUES (
 
 - **MinIO Console:** Acesse `http://localhost:9001` e faça login com `admin / adminpassword`.
 
-Pronto! Agora você tem o Docker rodando com PostgreSQL e MinIO. 🚀
+Pronto! Agora você tem o Docker rodando com PostgreSQL e MinIO. 
 
 
 # API EndPoints
 
-## 📘 Documentação da API
+## Documentação da API
 
 A documentação completa dos endpoints REST da aplicação está disponível no arquivo [`api-docs.md`](./api-docs.md).
 
 # Uso
 
-## 🚀 Como executar o projeto com Docker
+## Como executar o projeto com Docker
 
 ### 1. Pré-requisitos
 
